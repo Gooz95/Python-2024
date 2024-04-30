@@ -1,9 +1,9 @@
 /* CSS file for Index page */
 /* Image not showing not sure why */
 body {
-    background-image: url('images\pexels-willpicturethis-1954524.jpg');
+    background-image: url('images/gym-bg.jpg');
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
     background-repeat: no-repeat;
 
     font-family: Arial, sans-serif;
