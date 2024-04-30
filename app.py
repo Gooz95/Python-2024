@@ -1,4 +1,7 @@
-from flask import Flask, render_template
+# https://code.tutsplus.com/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972t
+
+from flask import Flask, render_template, request
+from siwel_files import siwel
 
 app = Flask(__name__)
 
@@ -21,6 +24,12 @@ def services():
 @app.route('/about/')
 def about():
     return render_template('about.html')
+
+
+# lewis added:
+@app.route('/test/')
+def test():
+    return siwel.return_html()
 
 
 if __name__ == "__main__":
