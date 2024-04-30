@@ -1,14 +1,14 @@
 /* CSS file for Index page */
 /* Image not showing not sure why */
 body {
-    background-image: url('images\pexels-willpicturethis-1954524.jpg');
+    background-image: url('/static/images/pexels-willpicturethis-1954524.jpg');
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
     background-repeat: no-repeat;
 
     font-family: Arial, sans-serif;
     background-color: #91bafb;
-    color: #333;
+    color: #000000;
     margin: 0;
     padding: 0;
 }
@@ -41,6 +41,14 @@ body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+
+    color: #000000; 
+    text-decoration: none;
+    padding: 5px 10px;
+    text-shadow: 1px 1px 0 #fff, 
+                 -1px -1px 0 #fff,  
+                 1px -1px 0 #fff,  
+                 -1px 1px 0 #fff; 
 }
 
 .navbar li a:hover {
