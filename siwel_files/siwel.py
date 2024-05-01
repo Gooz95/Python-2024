@@ -3,11 +3,27 @@ from psycopg2 import OperationalError
 
 from random import choice as r_choice
 
-db_name = "rum21133032"
-db_user = "rum21133032"
-db_password = ""
-db_host = "rum21133032.webdev.ucb.ac.uk"
+# db_name = "rum21133032"
+# db_user = "rum21133032"
+# db_password = ""
+# db_host = "rum21133032.webdev.ucb.ac.uk"
+# db_port = "5432"
+
+db_name = "gym_db"
+db_user = "postgres"
+db_password = "lewis"
+db_host = "localhost"
 db_port = "5432"
+
+
+connection = psycopg2.connect(
+            database=db_name,
+            user=db_user,
+            password=db_password,
+            host=db_host,
+            port=db_port)
+
+
 
 def db_create_connection(db_name, db_user, db_password, db_host, db_port):
     connection = None
@@ -24,11 +40,14 @@ def db_create_connection(db_name, db_user, db_password, db_host, db_port):
         print(f"The error '{e}' occurred")
     return connection
 
-# CONN = db_create_connection(db_name, db_user, db_password, db_host, db_port)
-# CUR = CONN.cursor()
+CONN = db_create_connection(db_name, db_user, db_password, db_host, db_port)
+CUR = CONN.cursor()
 
-# CUR.close()
-# CONN.close()
+CUR.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+CONN.commit()
+
+CUR.close()
+CONN.close()
 
 
 def return_test_html():
