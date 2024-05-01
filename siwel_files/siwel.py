@@ -40,14 +40,14 @@ def db_create_connection(db_name, db_user, db_password, db_host, db_port):
         print(f"The error '{e}' occurred")
     return connection
 
-CONN = db_create_connection(db_name, db_user, db_password, db_host, db_port)
-CUR = CONN.cursor()
+# CONN = db_create_connection(db_name, db_user, db_password, db_host, db_port)
+# CUR = CONN.cursor()
 
-CUR.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
-CONN.commit()
+# CUR.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+# CONN.commit()
 
-CUR.close()
-CONN.close()
+# CUR.close()
+# CONN.close()
 
 
 def return_test_html():
