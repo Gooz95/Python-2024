@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request
 from siwel_files import siwel
+from datetime import date
 
 app = Flask(__name__)
 
@@ -29,7 +30,18 @@ def about():
 # lewis added:
 @app.route('/test/')
 def test():
-    return siwel.return_html()
+    return siwel.return_test_html()
+
+@app.route('/calendar/')
+def calendar():
+    return siwel.return_calendar_html()
+
+@app.route('/event-view/', methods=['POST'])
+def calendar_event():
+    day = request.form.get("day")
+    month = request.form.get("month")
+    return siwel.return_event_html(day, month)
+
 
 
 if __name__ == "__main__":
