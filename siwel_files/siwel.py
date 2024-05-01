@@ -51,7 +51,7 @@ def return_html():
     <!DOCTYPE html>
     <html>
         <head>
-            <link rel="stylesheet" href='../static/styles.css'>
+            <link rel="stylesheet" href='../static/global.css'>
         </head>
         <body>
 
