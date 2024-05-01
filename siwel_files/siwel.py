@@ -76,25 +76,6 @@ def return_test_html():
     return html
 
 def return_calendar_html():
-
-    # print(date)
-
-
-
-    weekdays = ""
-    for i in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
-        weekdays += f"<li>{i}</li>"
-    
-    days = ""
-    for i in range(1,32):
-        days += f"""<form class="day_form" action="/calendar/" method="get">
-                        <input type="submit" value={str(i).zfill(2)} name="date">
-                    </form>"""
-    
-
-    
-    
-    x=1
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -115,17 +96,6 @@ def return_calendar_html():
 
             <h2>Calendar</h1>
             <div class="container">
-
-
-                <div class="month">
-                    <ul>
-                        <li class="prev">&#10094;</li>
-                        <li class="next">&#10095;</li>
-                        <li>August<br><span style="font-size:18px">2021</span></li>
-                    </ul>
-                </div>
-
-
                 <form class="day_form" action="/event-view/" method="post">
                     <input type="text" name="month">
                     <input type="number" min=1 max=31 value=1 name="day">
