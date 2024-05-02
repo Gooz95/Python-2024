@@ -1,5 +1,11 @@
 /* only add about page specific css here */
 /* Add this to your global.css or about.css */
+body {
+    background-image: url('images/gym-bg.jpg');
+    background-size: 100% cover; /* Set background image to cover the entire body */
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 .about-section {
     margin: 20px; /* Adjust margin as needed */
@@ -10,7 +16,7 @@
     color: #000000; /* Change font color to white */
 }
 
-.about-section h2 {
+.about-section h1 {
     margin-top: 0; /* Remove default margin */
     margin-bottom: 10px; /* Add some space below the heading */
     color: #ffffff; /* Change font color to white */

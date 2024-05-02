@@ -1,1 +1,30 @@
 /* only add classes page specific css here */
+body {
+    background-image: url('images/gym-bg.jpg');
+    background-size: 100% cover; /* Set background image to cover the entire body */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+    grid-gap: 20px; /* Spacing between grid items */
+}
+
+.class {
+    text-align: center;
+}
+
+.class img {
+    width: 100%;
+    max-width: 200px; /* Limit the width of the image */
+    height: auto;
+}
+
+.class h3, p {
+    margin-top: 10px; /* Add space above the heading */
+    color: #ffffff; /* Set the color of the heading */
+}
+

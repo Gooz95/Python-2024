@@ -1,1 +1,7 @@
 /* only add profile page specific css here */
+body {
+    background-image: url('images/gym-bg.jpg');
+    background-size: 100% cover; /* Set background image to cover the entire body */
+    background-position: center;
+    background-repeat: no-repeat;
+}
