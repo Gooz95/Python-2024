@@ -98,7 +98,6 @@ def return_test_html():
 
 
 def return_event_html(day, month, year):
-
     # do database query for events with this date
     # if none return "no events"
 
@@ -137,7 +136,6 @@ def return_event_html(day, month, year):
 
 
 def return_admin_html():
-
     month_select = ""
     for count, i in enumerate(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]):
         month_select += f"<option value='{str(count+1).zfill(2)}'>{i}</option>"

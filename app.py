@@ -32,10 +32,7 @@ def about():
 
 
 # lewis added:
-@app.route('/test/')
-def test():
-    return siwel.return_test_html()
-
+# event view post form
 @app.route('/event-view/', methods=['POST'])
 def event_view():
     day = request.form.get("day")
@@ -43,10 +40,12 @@ def event_view():
     year = request.form.get("year")
     return siwel.return_event_html(day, month, year)
 
+# admin page for adding event
 @app.route('/admin/')
 def admin():
     return siwel.return_admin_html()
 
+# event adder post form
 @app.route('/event-add/', methods=['POST'])
 def event_add():
     day = request.form.get("day")
