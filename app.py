@@ -43,6 +43,10 @@ def calendar_event():
     year = request.form.get("year")
     return siwel.return_event_html(day, month, year)
 
+@app.route('/admin/')
+def admin():
+    return siwel.return_admin_html()
+
 
 
 if __name__ == "__main__":

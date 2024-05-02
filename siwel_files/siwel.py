@@ -140,6 +140,47 @@ def return_event_html(day, month, year):
     return html
 
 
+def return_admin_html():
+
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <link rel="stylesheet" href='../static/global.css'>
+            <link rel="stylesheet" href='../static/classes.css'>
+        </head>
+        <body>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/classes">Classes</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+
+            <p>do admin stuff here</p>
+
+            <h2>Calendar</h1>
+            <div class="container">
+                <form class="day_form" action="/event-view/" method="post">
+                    <input type="number" min=1 max=31 value=1 name="day">
+                    <input type="text" name="month">
+                    <input type="number" min=2020 max=2034 value=2024 name="year">
+                    <input type="text" name="start-time">
+                    <input type="text" name="end-time">
+                    <input type="text" name="trainer">
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+
+        </body>
+    </html>
+    """
+
+    return html
+
 # cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
 # conn.commit()
 
