@@ -36,15 +36,12 @@ def about():
 def test():
     return siwel.return_test_html()
 
-@app.route('/calendar/')
-def calendar():
-    return siwel.return_calendar_html()
-
 @app.route('/event-view/', methods=['POST'])
 def calendar_event():
     day = request.form.get("day")
     month = request.form.get("month")
-    return siwel.return_event_html(day, month)
+    year = request.form.get("year")
+    return siwel.return_event_html(day, month, year)
 
 
 

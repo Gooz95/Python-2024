@@ -3,11 +3,27 @@ from psycopg2 import OperationalError
 
 from random import choice as r_choice
 
-db_name = "rum21133032"
-db_user = "rum21133032"
-db_password = ""
-db_host = "rum21133032.webdev.ucb.ac.uk"
+# db_name = "rum21133032"
+# db_user = "rum21133032"
+# db_password = ""
+# db_host = "rum21133032.webdev.ucb.ac.uk"
+# db_port = "5432"
+
+db_name = "gym_db"
+db_user = "postgres"
+db_password = "lewis"
+db_host = "localhost"
 db_port = "5432"
+
+
+connection = psycopg2.connect(
+            database=db_name,
+            user=db_user,
+            password=db_password,
+            host=db_host,
+            port=db_port)
+
+
 
 def db_create_connection(db_name, db_user, db_password, db_host, db_port):
     connection = None
@@ -26,6 +42,9 @@ def db_create_connection(db_name, db_user, db_password, db_host, db_port):
 
 # CONN = db_create_connection(db_name, db_user, db_password, db_host, db_port)
 # CUR = CONN.cursor()
+
+# CUR.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+# CONN.commit()
 
 # CUR.close()
 # CONN.close()
@@ -75,72 +94,10 @@ def return_test_html():
 
     return html
 
-def return_calendar_html():
-
-    # print(date)
 
 
 
-    weekdays = ""
-    for i in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
-        weekdays += f"<li>{i}</li>"
-    
-    days = ""
-    for i in range(1,32):
-        days += f"""<form class="day_form" action="/calendar/" method="get">
-                        <input type="submit" value={str(i).zfill(2)} name="date">
-                    </form>"""
-    
-
-    
-    
-    x=1
-    html = f"""
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <link rel="stylesheet" href='../static/global.css'>
-            <link rel="stylesheet" href='../static/classes.css'>
-        </head>
-        <body>
-
-            <nav class="navbar">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/classes">Classes</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </nav>
-
-            <h2>Calendar</h1>
-            <div class="container">
-
-
-                <div class="month">
-                    <ul>
-                        <li class="prev">&#10094;</li>
-                        <li class="next">&#10095;</li>
-                        <li>August<br><span style="font-size:18px">2021</span></li>
-                    </ul>
-                </div>
-
-
-                <form class="day_form" action="/event-view/" method="post">
-                    <input type="text" name="month">
-                    <input type="number" min=1 max=31 value=1 name="day">
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-
-        </body>
-    </html>
-    """
-
-    return html
-
-
-def return_event_html(day, month):
+def return_event_html(day, month, year):
 
     # do database query for events with this date
     # if none return "no events"
@@ -171,6 +128,8 @@ def return_event_html(day, month):
                 <p>{day}</p>
 
                 <p>{month}</p>
+
+                <p>{year}</p>
                 
             </div>
 
