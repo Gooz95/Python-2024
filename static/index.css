@@ -3,17 +3,27 @@
 /* background image */
 body {
     background-image: url('images/gym-bg.jpg');
-    background-size: 300%;
+    background-size: 100% cover; /* Set background image to cover the entire body */
     background-position: center;
     background-repeat: no-repeat;
 }
 
+h1 {
+    color: #ffffff; /* Set font color to white */
+    font-size: 48px; /* Adjust font size as needed */
+    text-align: center; /* Align text to the center */
+}
+
+p {color: #ffffff; /* Set font color to white */
+    font-size: 28px; /* Adjust font size as needed */
+    text-align: center; /* Align text to the center */
+}
 
 .discount-message {
     /* background-color: #f8d7da; */
-    position: absolute;
-    top: 600px;
-    left: 40%;
+    /* position: absolute; */
+    top: 0px;
+    left: 0%;
     color: #721c24;
     font-size: 40px;
     text-align: center;
@@ -23,3 +33,7 @@ body {
 .discount-message p {
     margin: 0;
 }
+
+
+
+

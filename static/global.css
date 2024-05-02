@@ -16,6 +16,10 @@ body {
 
 
 
+
+
+
+
 /* ===== navbar stuff ===== */
 .navbar {
     background-color: #333;
@@ -71,6 +75,11 @@ body {
 
 
 
+
+
+
+
+
 /* Bottom Navigation bar */
 /* static/styles.css */
 .footer {
@@ -100,4 +109,21 @@ body {
 
 .bottom-navbar li a:hover {
     background-color: #555;
+}
+
+.footer {
+    background-color: #333; /* Set background color of the footer */
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 2px solid #ffffff; /* Add outline color to the top border */
+}
+
+/* Footer size and font */
+.copyright {
+    color: #ffffff; /* Set font color of the copyright notice */
+    text-align: center;
+    margin: 0px 0; /* Add some margin for spacing */
+    font-size: 16px;
 }
