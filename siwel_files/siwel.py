@@ -125,11 +125,7 @@ def return_event_html(day, month, year):
             <h2>test</h1>
             <div class="container">
             
-                <p>{day}</p>
-
-                <p>{month}</p>
-
-                <p>{year}</p>
+                <p>{str(day).zfill(2)}-{month}-{year}</p>
                 
             </div>
 
@@ -141,6 +137,14 @@ def return_event_html(day, month, year):
 
 
 def return_admin_html():
+
+    month_select = ""
+    for count, i in enumerate(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]):
+        month_select += f"<option value='{str(count+1).zfill(2)}'>{i}</option>"
+
+    trainer_select = ""
+    for i in ["Adam", "Barry", "Axel", "Lewis"]: # would actually be an sql query for trainers
+        trainer_select += f"<option value='{i.lower()}'>{i}</option>" # value would be trainer id with id+name as option
 
     html = f"""
     <!DOCTYPE html>
@@ -162,15 +166,19 @@ def return_admin_html():
 
             <p>do admin stuff here</p>
 
-            <h2>Calendar</h1>
+            <h2>Add an event</h1>
             <div class="container">
-                <form class="day_form" action="/event-view/" method="post">
+                <form class="event_add" action="/event-add/" method="post">
                     <input type="number" min=1 max=31 value=1 name="day">
-                    <input type="text" name="month">
+                    <select name="month">
+                        {month_select}
+                    </select>
                     <input type="number" min=2020 max=2034 value=2024 name="year">
-                    <input type="text" name="start-time">
-                    <input type="text" name="end-time">
-                    <input type="text" name="trainer">
+                    <input type="time" name="start-time">
+                    <input type="time" name="end-time">
+                    <select name="trainers">
+                        {trainer_select}
+                    </select>
                     <input type="submit" value="Submit">
                 </form>
             </div>
@@ -189,5 +197,3 @@ def return_admin_html():
 # rum21133032
 # jowqZoTBPEd1EsE
 # ################################################################################# #
-
-# join vc
