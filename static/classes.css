@@ -6,23 +6,14 @@ body {
     background-repeat: no-repeat;
 }
 
-
-
-
-
-
-
 .container {
     max-width: 800px;
     margin: 10px auto;
     padding: 20px;
     color: #fff; /* Set text color to white */
     background-color: rgba(0, 0, 0, 0.800);
+    border: 1px solid #ffffff; /* Add a border for visual separation */
 }
-
-
-
-
 
 .class-grid {
     display: grid;
@@ -30,8 +21,14 @@ body {
     grid-gap: 20px; /* Spacing between grid items */
 }
 
+/* Specify a smaller height for the middle image */
+.small-height img {
+    min-width: 0px; /* Adjust the height as needed */
+}
+
 .class {
     text-align: center;
+    height: 300px; /* Fixed height for each grid item */
 }
 
 .class img {
@@ -44,12 +41,6 @@ body {
     margin-top: 10px; /* Add space above the heading */
     color: #ffffff; /* Set the color of the heading */
 }
-
-
-
-
-
-
 
 /* Style for the buttons */
 .class button {
@@ -70,4 +61,3 @@ body {
 .class button:hover {
     background-color: #0056b3; /* Darker green background on hover */
 }
-

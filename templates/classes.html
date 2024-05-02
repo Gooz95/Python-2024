@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Profile</title>
+    <title>Classes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='classes.css') }}">
 </head>
@@ -36,7 +36,7 @@ class scheduling, adding classes, class registration, an scheduling -->
                 <p>Get your heart pumping with our high-energy boxing classes.</p>
                 <button>Join Boxing Class</button>
             </div>
-            <div class="class">
+            <div class="class small-height">
                 <img src="/static/images/weightlifting.jpg" alt="Weightlifting">
                 <h3>Weightlifting</h3>
                 <p>Build strength and muscle with our weightlifting sessions.</p>
@@ -64,28 +64,11 @@ class scheduling, adding classes, class registration, an scheduling -->
         <h2>Calendar</h2> <!-- Moved h2 inside the container -->
         <form class="day_form" action="/event-view/" method="post">
             <input type="number" min=1 max=31 value=1 name="day">
-            <select name="month">
-                <option value='01'>January</option>
-                <option value='02'>February</option>
-                <option value='03'>March</option>
-                <option value='04'>April</option>
-                <option value='05'>May</option>
-                <option value='06'>June</option>
-                <option value='07'>July</option>
-                <option value='08'>August</option>
-                <option value='09'>September</option>
-                <option value='10'>October</option>
-                <option value='11'>November</option>
-                <option value='12'>December</option>
-            </select>
+            <input type="text" name="month">
             <input type="number" min=2020 max=2034 value=2024 name="year">
             <input type="submit" value="Submit">
         </form>
     </div>
-
-    <!-- Make this only show if admin is logged in -->
-    <h2>Admin</h1>
-    <a href="/admin/">Admin</a>
 
     
 

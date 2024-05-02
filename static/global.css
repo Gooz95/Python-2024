@@ -31,21 +31,22 @@ body {
 .navbar {
     background-color: #333;
     overflow: hidden;
-    border-bottom: 1px solid #000000; /* Add outline color to the top border */
-    border-top: 1px solid #000000;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
 
 .navbar ul {
     list-style-type: none;
     margin: 0px;
     padding: 0;
-    overflow: hidden;
+    overflow: hidden;    
 }
 
 .navbar li {
     float: left;
     margin: 8px;
     border-radius: 100px; /* Add roundness to the navigation list */
+    /* border: 1px solid #ffffff;  */
 }
 
 .navbar li a {
@@ -83,6 +84,7 @@ body {
 
 .navbar li a.active {
     background-color: #00aaff; /* Change background color of active link */
+    border: 1px solid #ffffff; /* Add a border for visual separation */
 }
 
 
@@ -102,7 +104,6 @@ body {
 .bottom-navbar {
     display: flex;
     justify-content: center;
-    padding: 10px 0;
 }
 
 .bottom-navbar li {
@@ -123,11 +124,10 @@ body {
 .footer {
     background-color: #333; /* Set background color of the footer */
     position: fixed;
-    left: 0;
+    right: 0;
     bottom: 0;
     width: 100%;
-    border-top: 1px solid #000000; /* Add outline color to the top border */
-    border-bottom: 1px solid #000000;
+    border: 1px solid #ffffff; /* Add a border for visual separation */
 }
 
 /* Footer size and font */
