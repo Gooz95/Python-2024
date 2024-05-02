@@ -14,6 +14,10 @@ def index():
 def profile():
     return render_template('profile.html')
 
+@app.route('/membership/')
+def membership():
+    return render_template('membership.html')
+
 @app.route('/classes/')
 def classes():
     return render_template('classes.html')

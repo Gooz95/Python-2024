@@ -3,7 +3,23 @@
 /* background image */
 body {
     background-image: url('images/gym-bg.jpg');
-    background-size: cover;
-    /* background-position: center; */
+    background-size: 300%;
+    background-position: center;
     background-repeat: no-repeat;
+}
+
+
+.discount-message {
+    /* background-color: #f8d7da; */
+    position: absolute;
+    top: 600px;
+    left: 40%;
+    color: #721c24;
+    font-size: 40px;
+    text-align: center;
+    padding: 0px;
+}
+
+.discount-message p {
+    margin: 0;
 }
