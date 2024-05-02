@@ -74,15 +74,6 @@ def return_test_html():
         </head>
         <body>
 
-            <nav class="navbar">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/classes">Classes</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </nav>
-
             <h2>Test showing a database query</h1>
             <div class="container">
                 <p>{rows}</p>
@@ -115,7 +106,9 @@ def return_event_html(day, month, year):
             <nav class="navbar">
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
                     <li><a href="/classes">Classes</a></li>
+                    <li><a href="/membership">Membership</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/about">About</a></li>
                 </ul>
@@ -156,7 +149,9 @@ def return_admin_html():
             <nav class="navbar">
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
                     <li><a href="/classes">Classes</a></li>
+                    <li><a href="/membership">Membership</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/about">About</a></li>
                 </ul>
