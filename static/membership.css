@@ -4,3 +4,52 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+
+
+
+.container {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    color: #fff; /* Set text color to white */
+    background-color: rgba(0, 0, 0, 0.800);
+}
+
+
+/* Only add membership page specific CSS here */
+.membership-grid {
+    display: flex; /* Use flexbox to create a flexible layout */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+}
+
+.membership-plan {
+    flex: 1; /* Make each plan flexible to occupy equal space */
+    padding: 10px;
+    border: 1px solid #ccc; /* Add a border for visual separation */
+    border-radius: 8px; /* Add rounded corners */
+    background-color: #2a2a2a; /* Set background color */
+    margin: 30px 10px; /* Add margin to create space between plans */
+}
+
+.membership-plan h2 {
+    margin-top: 10px; /* Remove default margin */
+}
+
+.membership-plan p {
+    margin-bottom: 0px; /* Add space between paragraphs */
+}
+
+.membership-plan button {
+    background-color: #007bff; /* Set button background color */
+    color: #fff; /* Set button text color */
+    border: none; /* Remove button border */
+    margin-top: 30px;
+    padding: 10px 30px; /* Add padding to button */
+    border-radius: 100px; /* Add rounded corners to button */
+    cursor: pointer; /* Add cursor pointer on hover */
+}
+
+.membership-plan button:hover {
+    background-color: #0056b3; /* Change button background color on hover */
+}

@@ -5,3 +5,26 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.container {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    color: #fff; /* Set text color to white */
+    background-color: rgba(0, 0, 0, 0.800);
+}
+
+.container h2 {
+    font-size: 24px; /* Increase font size for user's name */
+    margin-bottom: 20px; /* Add some spacing below user's name */
+}
+
+.container h3 {
+    font-size: 20px; /* Set font size for section headings */
+    margin-top: 30px; /* Add some spacing above section headings */
+}
+
+.container p {
+    font-size: 16px; /* Set font size for paragraph text */
+    line-height: 1.5; /* Increase line height for better readability */
+}
