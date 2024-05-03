@@ -88,6 +88,7 @@ body {
 
 .navbar li a:hover {
     background-color: #0056b3;
+    border: 1px solid #000000; /* Add a border for visual separation */
     transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 
