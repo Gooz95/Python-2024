@@ -43,10 +43,13 @@ def event_view():
 # admin page for adding event
 @app.route('/admin/')
 def admin():
-    admin = request.cookies.get("admin")
-    if bool(int(admin)):
-        return siwel.return_admin_html()
-    else:
+    try:
+        admin = request.cookies.get("admin")
+        if bool(int(admin)):
+            return siwel.return_admin_html()
+        else:
+            return redirect("/", code=302)
+    except:
         return redirect("/", code=302)
 
 @app.route('/set-admin/')
