@@ -30,12 +30,10 @@ def users_table_creation():
             usertype TEXT
             );"""
     CUR.execute(sql)
-    CONN.commit()
 
-    fake_users = [["Lewis","Rumsby","pass123","admin"], ["Axel","Seston","qwerty","user"],["Dawood","Madarshahian","p@ssw0rd","trainer"]]
+    fake_users = [["Lewis","Rumsby","pass123","admin"], ["Axel","Seston","qwerty","user"],["Dawood","Madarshahian","p@ssw0rd","trainer"], ["Luis", "Henrique", "wordpass", "trainer"]]
     for i in fake_users:
-        CUR.execute(f"INSERT INTO Users (firstname, lastname, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}');")
-        CONN.commit()
+        CUR.execute(f"INSERT INTO users (firstname, lastname, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}');")
 
 
 
@@ -46,27 +44,16 @@ def events_table_creation():
             classname TEXT,
             date TEXT,
             starttime TEXT,
-            endtime TEXT
+            endtime TEXT,
             trainer TEXT
             );"""
     CUR.execute(sql)
-    CONN.commit()
 
-    fake_users = [["Lewis","Rumsby","pass123","admin"], ["Axel","Seston","qwerty","user"],["Dawood","Madarshahian","p@ssw0rd","trainer"]]
-    for i in fake_users:
-        CUR.execute(f"INSERT INTO Users (firstname, lastname, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}');")
-        CONN.commit()
+    fake_events = [["Cardio","03-04-2024","09:30","10:30", "Dawood"], ["Gym","05-04-2024","14:45","16:15", "Luis"], ["Calesthenics","05-04-2024","10:00","12:30", "Dawood"]]
+    for i in fake_events:
+        CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
 
-# cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
-# rows = CUR.execute("SELECT * FROM your_table WHERE user = 'lewis';")
-# conn.commit()
-
-# ################################### IMPORTANT ################################### #
-# DATABASE_URL="postgresql://rum21133032@rum21133032.webdev.ucb.ac.uk:5432/rum21133032"
-# rum21133032
-# jowqZoTBPEd1EsE
-# ################################################################################# #
 
 
 # these are various connection settings depending on which db you are trying to connnect to - Lewis
@@ -82,14 +69,36 @@ CONN = create_connection(settings[choice])
 if  CONN == None:
     print("Connection to PostgreSQL DB unsuccessful")
 else:
+    CONN.autocommit = True
     CUR = CONN.cursor()
-    CUR.execute("DROP TABLE users;")
+    for i in ["users", "events"]:
+        try:
+            CUR.execute(f"DROP TABLE {i};")
+        except psycopg2.errors.UndefinedTable:
+            pass
     users_table_creation()
+    events_table_creation()
 
-    CUR.execute("SELECT * FROM users WHERE usertype = 'admin';")
+    CUR.execute("SELECT firstname FROM users WHERE usertype = 'trainer';")
     result = CUR.fetchall()
     for row in result:
-        print(row)
+        print(row[0])
 
     CUR.close()
     CONN.close()
+
+
+
+
+
+
+
+
+
+
+# ignore
+# ################################### IMPORTANT ################################### #
+# DATABASE_URL="postgresql://rum21133032@rum21133032.webdev.ucb.ac.uk:5432/rum21133032"
+# rum21133032
+# jowqZoTBPEd1EsE
+# ################################################################################# #
