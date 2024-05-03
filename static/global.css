@@ -66,6 +66,10 @@ body {
                     -1px  1px 0 #fff;
         color: rgb(0, 0, 0);
     }
+
+    .navbar li a.active {
+        border: 1px solid #ffffff; /* Add a border for visual separation */
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -76,6 +80,10 @@ body {
                     -1px  1px 0 #000000;
         color: rgb(255, 255, 255);
     }
+
+    .navbar li a.active {
+        border: 1px solid #000000; /* Add a border for visual separation */
+    }
 }
 
 .navbar li a:hover {
@@ -84,7 +92,6 @@ body {
 
 .navbar li a.active {
     background-color: #00aaff; /* Change background color of active link */
-    border: 1px solid #ffffff; /* Add a border for visual separation */
 }
 
 
