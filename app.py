@@ -1,6 +1,6 @@
 # https://code.tutsplus.com/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972t
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 from siwel_files import siwel
 from datetime import date
 
@@ -43,7 +43,23 @@ def event_view():
 # admin page for adding event
 @app.route('/admin/')
 def admin():
-    return siwel.return_admin_html()
+    admin = request.cookies.get("admin")
+    if bool(int(admin)):
+        return siwel.return_admin_html()
+    else:
+        return redirect("/", code=302)
+
+@app.route('/set-admin/')
+def set_admin():
+    res = make_response(redirect("/", code=302))
+    res.set_cookie("admin", "1")
+    return res
+
+@app.route('/remove-admin/')
+def remove_admin():
+    res = make_response(redirect("/", code=302))
+    res.set_cookie("admin", "0")
+    return res
 
 # event adder post form
 @app.route('/event-add/', methods=['POST'])
