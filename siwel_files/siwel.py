@@ -67,9 +67,8 @@ def return_admin_html():
                 </ul>
             </nav>
 
-            <p>do admin stuff here</p>
-
-            <h2>Add an event</h1>
+            <h2>Add an event</h2>
+            
             <div class="container">
                 <form class="event_add" action="/event-add/" method="post">
                     <input type="text" placeholder="Class name" name="class-name">
