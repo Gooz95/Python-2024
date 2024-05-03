@@ -64,7 +64,20 @@ class scheduling, adding classes, class registration, an scheduling -->
         <h2>Calendar</h2> <!-- Moved h2 inside the container -->
         <form class="day_form" action="/event-view/" method="post">
             <input type="number" min=1 max=31 value=1 name="day">
-            <input type="text" name="month">
+            <select name="month">
+                <option value='01'>January</option>
+                <option value='02'>February</option>
+                <option value='03'>March</option>
+                <option value='04'>April</option>
+                <option value='05'>May</option>
+                <option value='06'>June</option>
+                <option value='07'>July</option>
+                <option value='08'>August</option>
+                <option value='09'>September</option>
+                <option value='10'>October</option>
+                <option value='11'>November</option>
+                <option value='12'>December</option>
+            </select>
             <input type="number" min=2020 max=2034 value=2024 name="year">
             <input type="submit" value="Submit">
         </form>
