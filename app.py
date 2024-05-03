@@ -47,10 +47,9 @@ def admin():
         admin = request.cookies.get("admin")
         if bool(int(admin)):
             return siwel.return_admin_html()
-        else:
-            return redirect("/", code=302)
     except:
-        return redirect("/", code=302)
+        pass
+    return redirect("/", code=302)
 
 @app.route('/set-admin/')
 def set_admin():
