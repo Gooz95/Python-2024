@@ -62,7 +62,10 @@ def event_add():
 @app.route('/membership/purchases/')
 def purchase():
     type = request.args.get("type")
-    return siwel.return_purchase_html(type)
+    if type not in ["standard", "premium", "family"]:
+        return redirect("/membership/", code=302)
+    else:
+        return siwel.return_purchase_html(type)
 
 
 if __name__ == "__main__":
