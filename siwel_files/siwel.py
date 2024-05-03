@@ -93,13 +93,27 @@ def return_admin_html():
     return html
 
 
-def return_purchase_html():
+def return_purchase_html(type):
+    values = {
+        "standard": {
+            "price" : "£1.99",
+            "desc" : "blah blah 1"
+        },
+        "premium": {
+            "price" : "£2.99",
+            "desc" : "blah blah 2"
+        },
+        "family": {
+            "price" : "£3.99",
+            "desc" : "blah blah 3"
+        }
+    }
     html = f"""
     <!DOCTYPE html>
     <html>
         <head>
-            <link rel="stylesheet" href='../static/global.css'>
-            <link rel="stylesheet" href='../static/membership.css'>
+            <link rel="stylesheet" href='../../static/global.css'>
+            <link rel="stylesheet" href='../../static/membership.css'>
         </head>
         <body>
 
@@ -114,8 +128,9 @@ def return_purchase_html():
                 </ul>
             </nav>
 
-            <h1>Payment</h1>
-            <p></p>
+            <h1>Payment for type {type}</h1>
+            <p>Price = {values[type]["price"]}</p>
+            <p>{values[type]["desc"]}</p>
 
             <h2>Add an event</h1>
 
