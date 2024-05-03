@@ -72,6 +72,7 @@ def return_admin_html():
             <h2>Add an event</h1>
             <div class="container">
                 <form class="event_add" action="/event-add/" method="post">
+                    <input type="text" placeholder="Class name" name="class-name">
                     <input type="number" min=1 max=31 value=1 name="day">
                     <select name="month">
                         {month_select}

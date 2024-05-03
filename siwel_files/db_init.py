@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2 import OperationalError
 # https://www.tutorialspoint.com/postgresql/postgresql_where_clause.htm
 
+# establish connnection with database
 def create_connection(settings):
     connection = None
     try:
@@ -17,7 +18,10 @@ def create_connection(settings):
         print(f"The error '{e}' occurred")
     return connection
 
-def table_creation():
+
+
+# create users table
+def users_table_creation():
     sql = """CREATE TABLE users (
             id SERIAL PRIMARY KEY,
             firstname TEXT,
@@ -34,6 +38,24 @@ def table_creation():
         CONN.commit()
 
 
+
+# create events/classes table
+def events_table_creation():
+    sql = """CREATE TABLE events (
+            id SERIAL PRIMARY KEY,
+            classname TEXT,
+            date TEXT,
+            starttime TEXT,
+            endtime TEXT
+            trainer TEXT
+            );"""
+    CUR.execute(sql)
+    CONN.commit()
+
+    fake_users = [["Lewis","Rumsby","pass123","admin"], ["Axel","Seston","qwerty","user"],["Dawood","Madarshahian","p@ssw0rd","trainer"]]
+    for i in fake_users:
+        CUR.execute(f"INSERT INTO Users (firstname, lastname, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}');")
+        CONN.commit()
 
 
 # cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
@@ -62,7 +84,7 @@ if  CONN == None:
 else:
     CUR = CONN.cursor()
     CUR.execute("DROP TABLE users;")
-    table_creation()
+    users_table_creation()
 
     CUR.execute("SELECT * FROM users WHERE usertype = 'admin';")
     result = CUR.fetchall()
