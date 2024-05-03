@@ -60,4 +60,5 @@ body {
 /* Hover effect for buttons */
 .class button:hover {
     background-color: #0056b3; /* Darker green background on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
 }

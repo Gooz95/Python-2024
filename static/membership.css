@@ -51,6 +51,55 @@ body {
     cursor: pointer; /* Add cursor pointer on hover */
 }
 
-.membership-plan button:hover {
+.membership-plan .membership-button:hover {
     background-color: #0056b3; /* Change button background color on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
+
+
+
+
+
+
+
+
+
+.plan-description {
+    text-align: center; /* Center align text */
+    background-color: #000000a5; /* Light gray background */
+    padding: 20px; /* Add padding around the content */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    width: 50%; /* Set width to occupy 50% of the screen */
+    margin: auto; /* Center the container horizontally */
+    margin-top: 100px; /* Add some top margin to center vertically */
+    border: 1px solid #ffffff; /* Add a border for visual separation */
+}
+
+.plan-description h1 {
+    font-size: 48px; /* Increase heading font size */
+    color: #ffffff; /* Dark text color */
+}
+
+.plan-description p {
+    font-size: 18px; /* Set paragraph font size */
+    color: #ffffff; /* Lighter text color */
+    margin-bottom: 10px; /* Add spacing between paragraphs */
+}
+
+.buy-button {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    font-size: 16px; /* Set font size */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Add cursor pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    border-radius: 100px; /* Add rounded corners to button */
+}
+
+.buy-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+

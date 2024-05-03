@@ -120,16 +120,19 @@ def return_admin_html():
 def return_purchase_html(type):
     values = {
         "standard": {
-            "price" : "£1.99",
-            "desc" : "blah blah 1"
+            "name" : "Standard Plan",
+            "price" : "£11.99",
+            "desc" : "The Standard Plan offers access to our full range of gym facilities, including cardio equipment, weightlifting machines, and group fitness classes. With this plan, you can work out at any time during our regular opening hours. Additionally, you'll receive personalized support from our experienced trainers to help you achieve your fitness goals. Join the Standard Plan today to start your journey towards a healthier lifestyle!"
         },
         "premium": {
-            "price" : "£2.99",
-            "desc" : "blah blah 2"
+            "name" : "Premium Plan",
+            "price" : "£17.99",
+            "desc" : "Upgrade to our Premium Plan for an enhanced gym experience. With the Premium Plan, you'll enjoy all the benefits of our Standard Plan, plus exclusive perks such as access to our premium fitness equipment, sauna, and steam room facilities. You'll also receive priority booking for our most popular group fitness classes and personalized training sessions with our top-tier trainers. Join the Premium Plan today to take your fitness journey to the next level!"
         },
         "family": {
-            "price" : "£3.99",
-            "desc" : "blah blah 3"
+            "name" : "Family Plan",
+            "price" : "£19.99",
+            "desc" : "Our Family Plan is perfect for families who want to prioritize health and fitness together. With the Family Plan, you and your loved ones can enjoy unlimited access to our gym facilities, group fitness classes, and exclusive amenities at a discounted rate. Stay motivated and support each other on your fitness journey while saving money with our Family Plan. Join today and make health and wellness a family affair!"
         }
     }
     html = f"""
@@ -152,12 +155,13 @@ def return_purchase_html(type):
                 </ul>
             </nav>
 
-            <h1>Payment for type {type}</h1>
-            <p>Price = {values[type]["price"]}</p>
-            <p>{values[type]["desc"]}</p>
-
-            <h2>Add an event</h1>
-
+            
+            <div class="plan-description">
+                <h1>{values[type]["name"]}</h1>
+                <p>{values[type]["desc"]}</p>
+                <p>Price = {values[type]["price"]}</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
 
         </body>
     </html>

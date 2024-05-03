@@ -87,11 +87,12 @@ body {
 }
 
 .navbar li a:hover {
-    background-color: #00aaff;
+    background-color: #0056b3;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 
 .navbar li a.active {
-    background-color: #00aaff; /* Change background color of active link */
+    background-color: #0056b3; /* Change background color of active link */
 }
 
 
