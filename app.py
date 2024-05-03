@@ -59,7 +59,7 @@ def event_add():
     return redirect("/admin/", code=302)
 
 
-@app.route('/membership/purchases/')
+@app.route('/memberships/purchases/')
 def purchase():
     return siwel.return_purchase_html()
 
