@@ -90,5 +90,36 @@ def return_admin_html():
         </body>
     </html>
     """
+    return html
 
+
+def return_purchase_html():
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <link rel="stylesheet" href='../static/global.css'>
+            <link rel="stylesheet" href='../static/membership.css'>
+        </head>
+        <body>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/classes">Classes</a></li>
+                    <li><a href="/membership">Membership</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </nav>
+
+            <p>do admin stuff here</p>
+
+            <h2>Add an event</h1>
+
+
+        </body>
+    </html>
+    """
     return html

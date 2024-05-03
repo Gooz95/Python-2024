@@ -59,6 +59,10 @@ def event_add():
     return redirect("/admin/", code=302)
 
 
+@app.route('/membership/purchases/')
+def purchase():
+    return siwel.return_purchase_html()
+
 
 if __name__ == "__main__":
     app.run(debug=True)
