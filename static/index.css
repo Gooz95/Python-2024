@@ -8,6 +8,16 @@ body {
     background-repeat: no-repeat;
 }
 
+
+.container {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    color: #fff; /* Set text color to white */
+    background-color: rgba(0, 0, 0, 0.800);
+    border: 1px solid #ffffff; /* Add a border for visual separation */
+}
+
 h1 {
     color: #ffffff; /* Set font color to white */
     font-size: 48px; /* Adjust font size as needed */
@@ -17,21 +27,40 @@ h1 {
 p {color: #ffffff; /* Set font color to white */
     font-size: 28px; /* Adjust font size as needed */
     text-align: center; /* Align text to the center */
+    
 }
 
+
+
+
+
+
+
+
 .discount-message {
-    /* background-color: #f8d7da; */
-    /* position: absolute; */
-    top: 0px;
-    left: 0%;
     color: #721c24;
     font-size: 40px;
     text-align: center;
-    padding: 0px;
+    padding: 0px 0px; /* Adjust padding to move the message up or down */
+    margin-top: 160px; /* Adjust margin-top to move the message up or down */
+    background-color: rgba(0, 0, 0, 0.800);
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+
 }
 
-.discount-message p {
-    margin: 0;
+.join-now-button {
+    background-color: #007bff; /* Set button background color */
+    color: #fff; /* Set button text color */
+    border: none; /* Remove button border */
+    margin-top: 0px;
+    padding: 10px 30px; /* Add padding to button */
+    border-radius: 100px; /* Add rounded corners to button */
+    cursor: pointer; /* Add cursor pointer on hover */
+}
+
+.join-now-button:hover {
+    background-color: #0056b3; /* Change button background color on hover */
 }
 
 

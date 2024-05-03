@@ -20,30 +20,41 @@ body {
 
 
 
+
+
+
+
+
+
+
 /* ===== navbar stuff ===== */
 .navbar {
     background-color: #333;
     overflow: hidden;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
 
 .navbar ul {
     list-style-type: none;
-    margin: 0;
+    margin: 0px;
     padding: 0;
-    overflow: hidden;
+    overflow: hidden;    
 }
 
 .navbar li {
     float: left;
+    margin: 8px;
+    border-radius: 100px; /* Add roundness to the navigation list */
+    /* border: 1px solid #ffffff;  */
 }
 
 .navbar li a {
     display: block;
     text-align: center;
-    padding: 14px 16px;
-
+    padding: 10px 10px;
+    border-radius: 100px; /* Add roundness to the navigation list */
     text-decoration: none;
-    /* padding: 5px 10px; */
 }
 
 /* light mode vs dark mode preferences on text */
@@ -71,6 +82,14 @@ body {
     background-color: #00aaff;
 }
 
+.navbar li a.active {
+    background-color: #00aaff; /* Change background color of active link */
+    border: 1px solid #ffffff; /* Add a border for visual separation */
+}
+
+
+
+
 
 
 
@@ -82,18 +101,9 @@ body {
 
 /* Bottom Navigation bar */
 /* static/styles.css */
-.footer {
-    background-color: #333;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
 .bottom-navbar {
     display: flex;
     justify-content: center;
-    padding: 10px 0;
 }
 
 .bottom-navbar li {
@@ -114,16 +124,16 @@ body {
 .footer {
     background-color: #333; /* Set background color of the footer */
     position: fixed;
-    left: 0;
+    right: 0;
     bottom: 0;
     width: 100%;
-    border-top: 2px solid #ffffff; /* Add outline color to the top border */
+    border: 1px solid #ffffff; /* Add a border for visual separation */
 }
 
 /* Footer size and font */
 .copyright {
     color: #ffffff; /* Set font color of the copyright notice */
     text-align: center;
-    margin: 0px 0; /* Add some margin for spacing */
+    margin: 0px 0px; /* Add some margin for spacing */
     font-size: 16px;
 }
