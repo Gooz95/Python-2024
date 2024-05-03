@@ -1,11 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
-
-# db_name = "rum21133032"
-# db_user = "rum21133032"
-# db_password = ""
-# db_host = "rum21133032.webdev.ucb.ac.uk"
-# db_port = "5432"
+# https://www.tutorialspoint.com/postgresql/postgresql_where_clause.htm
 
 def create_connection(settings):
     connection = None
@@ -23,16 +18,20 @@ def create_connection(settings):
     return connection
 
 def table_creation():
-    sql = """CREATE TABLE Users (
-            ID int NOT NULL AUTO_INCREMENT,
-            FirstName varchar(255),
-            LastName varchar(255),
-            Password varchar(255),
-            PRIMARY KEY (ID)
+    sql = """CREATE TABLE users (
+            id SERIAL PRIMARY KEY,
+            firstname TEXT,
+            lastname TEXT,
+            password TEXT,
+            usertype TEXT
             );"""
-    
     CUR.execute(sql)
     CONN.commit()
+
+    fake_users = [["Lewis","Rumsby","pass123","admin"], ["Axel","Seston","qwerty","user"],["Dawood","Madarshahian","p@ssw0rd","trainer"]]
+    for i in fake_users:
+        CUR.execute(f"INSERT INTO Users (firstname, lastname, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}');")
+        CONN.commit()
 
 
 
@@ -62,12 +61,13 @@ if  CONN == None:
     print("Connection to PostgreSQL DB unsuccessful")
 else:
     CUR = CONN.cursor()
-
+    CUR.execute("DROP TABLE users;")
     table_creation()
 
-    test = "INSERT INTO Users (FirstName, LastName, Password) VALUES ('Lewis', 'Rumsby', 'pass123');"
-    CUR.execute(test)
-    CONN.commit()
+    CUR.execute("SELECT * FROM users WHERE usertype = 'admin';")
+    result = CUR.fetchall()
+    for row in result:
+        print(row)
 
     CUR.close()
     CONN.close()
