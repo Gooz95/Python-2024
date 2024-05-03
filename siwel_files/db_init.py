@@ -60,6 +60,8 @@ def events_table_creation():
 settings = [
     ["gym_db", "postgres", "lewis", "localhost", "5432"], # pgAdmin 4 on Lewis computer
     ["rum21133032", "rum21133032", "", "rum21133032.webdev.ucb.ac.uk", "5432"], # VirtualMin db on University LAN
+    ["gym_db", "postgres", "dawood", "localhost", "5432"], # pgAdmin 4 on Dawood computer
+    
 ]
 for id, i in enumerate(settings):
     print(f"{id+1}. {i}")
