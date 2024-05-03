@@ -41,7 +41,7 @@ body {
     margin-bottom: 0px; /* Add space between paragraphs */
 }
 
-.membership-plan button {
+.membership-plan .membership-button {
     background-color: #007bff; /* Set button background color */
     color: #fff; /* Set button text color */
     border: none; /* Remove button border */

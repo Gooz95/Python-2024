@@ -31,8 +31,9 @@
             <h2>Standard Plan</h2>
             <p>Access to gym facilities during standard hours</p>
             <p>Price: $XX per month</p>
-            <form method="get" action="/memberships/purchases/">
-                <input type="submit" name="type" id="standard" value="Choose Standard Plan">
+            <form method="get" action="/membership/purchases/">
+                <input type="hidden" name="type" value="standard">
+                <input class="membership-button" type="submit" value="Choose Standard Plan">
             </form>
         </div>
         <div class="membership-plan">
@@ -40,14 +41,20 @@
             <p>Access to gym facilities 24/7</p>
             <p>Discounts on personal training sessions</p>
             <p>Price: $XX per month</p>
-            <button>Choose Premium Plan</button>
+            <form method="get" action="/membership/purchases/">
+                <input type="hidden" name="type" value="premium">
+                <input class="membership-button" type="submit" value="Choose Premium Plan">
+            </form>
         </div>
         <div class="membership-plan">
             <h2>Family Plan</h2>
             <p>Access for you and your family members</p>
             <p>Discounts on group classes</p>
             <p>Price: $XX per month</p>
-            <button>Choose Family Plan</button>
+            <form method="get" action="/membership/purchases/">
+                <input type="hidden" name="type" value="family">
+                <input class="membership-button" type="submit" value="Choose Family Plan">
+            </form>
         </div>
     </div>
 </div>
