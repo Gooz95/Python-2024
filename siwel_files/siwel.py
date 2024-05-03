@@ -98,8 +98,8 @@ def return_purchase_html():
     <!DOCTYPE html>
     <html>
         <head>
-            <link rel="stylesheet" href='../../static/global.css'>
-            <link rel="stylesheet" href='../../static/classes.css'>
+            <link rel="stylesheet" href='../static/global.css'>
+            <link rel="stylesheet" href='../static/membership.css'>
         </head>
         <body>
 
@@ -114,9 +114,10 @@ def return_purchase_html():
                 </ul>
             </nav>
 
-            <p>do admin stuff here</p>
+            <h1>Payment</h1>
+            <p></p>
 
-            <h2>Add an event</h2>
+            <h2>Add an event</h1>
 
 
         </body>
