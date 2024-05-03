@@ -1,3 +1,28 @@
+import psycopg2
+from psycopg2 import OperationalError
+
+def create_connection():
+    con = None
+    try:
+        con = psycopg2.connect(
+            database="gym_db",
+            user="postgres",
+            password="lewis",
+            host="localhost",
+            port="5432",
+        )
+        print("Connection to PostgreSQL DB successful")
+    except OperationalError as e:
+        print(f"The error '{e}' occurred")
+    return con
+
+# CONN = create_connection()
+# if CONN == None:
+#     print("Connection to PostgreSQL DB unsuccessful")
+# else:
+#     CUR = CONN.cursor()
+    
+
 def return_event_html(day, month, year):
     # do database query for events with this date
     # if none return "no events"
@@ -68,7 +93,7 @@ def return_admin_html():
             </nav>
 
             <h2>Add an event</h2>
-            
+
             <div class="container">
                 <form class="event_add" action="/event-add/" method="post">
                     <input type="text" placeholder="Class name" name="class-name">
