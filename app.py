@@ -33,6 +33,10 @@ def about():
 def login():
     return render_template('login.html')
 
+@app.route('/create_account/')
+def create_account():
+    return render_template('create_account.html')
+
 
 # lewis added:
 # event view post form
@@ -57,6 +61,7 @@ def admin():
 # event adder post form
 @app.route('/event-add/', methods=['POST'])
 def event_add():
+    class_name = request.form.get("class-name")
     day = request.form.get("day")
     month = request.form.get("month")
     year = request.form.get("year")
@@ -64,7 +69,8 @@ def event_add():
     end_time = request.form.get("end-time")
     trainer = request.form.get("trainers")
 
-    print(day, month, year, start_time, end_time, trainer)
+
+    siwel.db_event_add(class_name, day, month, year, start_time, end_time, trainer)
     return redirect("/admin/", code=302)
 
 
@@ -92,6 +98,16 @@ def login_event():
         return res
 
     return redirect("/login/", code=302)
+
+# create account
+@app.route('/create-event/', methods=['POST'])
+def create_event():
+    firstn = request.form.get("firstname")
+    lastn = request.form.get("lastname")
+    passw = request.form.get("password")
+    create = siwel.create_user(firstn, lastn, passw)
+
+    return redirect("/", code=302)
 
 # logout
 @app.route('/logout/')

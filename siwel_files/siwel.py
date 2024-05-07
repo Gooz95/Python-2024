@@ -72,10 +72,10 @@ def return_admin_html():
 
     trainer_select = ""
 
-    CUR.execute("SELECT firstname FROM users WHERE usertype = 'trainer';")
+    CUR.execute("SELECT id, firstname FROM users WHERE usertype = 'trainer';")
     trainers = CUR.fetchall()
     for i in trainers:
-        trainer_select += f"<option value='{i[0].lower()}'>{i[0]}</option>" # value would be trainer id with id+name as option
+        trainer_select += f"<option value='{i[0]}'>{i[1]}</option>" # value would be trainer id with id+name as option
 
     html = f"""
     <!DOCTYPE html>
@@ -110,7 +110,6 @@ def return_admin_html():
                     <input type="time" name="start-time">
                     <input type="time" name="end-time">
                     <select name="trainers">
-                        <option value='None'></option>
                         {trainer_select}
                     </select>
                     <input type="submit" value="Submit">
@@ -175,6 +174,7 @@ def return_purchase_html(type):
     return html
 
 
+# log in a user and return their name and if they are admin
 def log_in_user(usern, passw):
     CUR.execute(f"SELECT * FROM users WHERE username = '{usern}' AND password = '{passw}';")
     result = CUR.fetchall()
@@ -186,3 +186,36 @@ def log_in_user(usern, passw):
             return {"login":True, "data":[f"{result[0][1]} {result[0][2]}", False]}
     else:
         return {"login":False}
+
+# create a user account
+def create_user(firstn, lastn, passw):
+    usern = firstn.lower() + lastn.lower()[:3]
+
+
+    for i in range(0, 100):
+        usern2 = usern
+        CUR.execute(f"SELECT * FROM users WHERE username = '{usern2}';")
+        result = CUR.fetchall()
+
+        if len(result) == 0:
+            break
+        else:
+            usern += str(i)
+    
+    CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{passw}', 'user');")
+    return usern2
+
+
+# admin function for adding an event
+def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
+    date = f"{str(day).zfill(2)}-{month}-{year}"
+    no_empty_values = True
+    for i in [class_name, start_time, end_time]:
+        if i == "":
+            no_empty_values = False
+    if no_empty_values:
+        CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');")
+        CONN.commit()
+    else:
+        print("Values cannot be empty")
+    
