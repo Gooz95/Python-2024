@@ -5,10 +5,10 @@ def create_connection():
     con = None
     try:
         con = psycopg2.connect(
-            database="gym_db",
-            user="postgres",
-            password="lewis",
-            host="localhost",
+            database="rum21133032",
+            user="rum21133032",
+            password="",
+            host="rum21133032.webdev.ucb.ac.uk",
             port="5432",
         )
         print("Connection to PostgreSQL DB successful")
@@ -16,12 +16,14 @@ def create_connection():
         print(f"The error '{e}' occurred")
     return con
 
-# CONN = create_connection()
-# if CONN == None:
-#     print("Connection to PostgreSQL DB unsuccessful")
-# else:
-#     CUR = CONN.cursor()
-    
+
+CONN = create_connection()
+if CONN == None:
+    print("Connection to PostgreSQL DB unsuccessful")
+else:
+    CONN.autocommit = True
+    CUR = CONN.cursor()
+
 
 def return_event_html(day, month, year):
     # do database query for events with this date
@@ -69,8 +71,11 @@ def return_admin_html():
         month_select += f"<option value='{str(count+1).zfill(2)}'>{i}</option>"
 
     trainer_select = ""
-    for i in ["Adam", "Barry", "Axel", "Lewis"]: # would actually be an sql query for trainers
-        trainer_select += f"<option value='{i.lower()}'>{i}</option>" # value would be trainer id with id+name as option
+
+    CUR.execute("SELECT firstname FROM users WHERE usertype = 'trainer';")
+    trainers = CUR.fetchall()
+    for i in trainers:
+        trainer_select += f"<option value='{i[0].lower()}'>{i[0]}</option>" # value would be trainer id with id+name as option
 
     html = f"""
     <!DOCTYPE html>
@@ -105,6 +110,7 @@ def return_admin_html():
                     <input type="time" name="start-time">
                     <input type="time" name="end-time">
                     <select name="trainers">
+                        <option value='None'></option>
                         {trainer_select}
                     </select>
                     <input type="submit" value="Submit">
@@ -167,3 +173,16 @@ def return_purchase_html(type):
     </html>
     """
     return html
+
+
+def log_in_user(usern, passw):
+    CUR.execute(f"SELECT * FROM users WHERE username = '{usern}' AND password = '{passw}';")
+    result = CUR.fetchall()
+
+    if len(result) == 1:
+        if result[0][5] == "admin":
+            return {"login":True, "data":[f"{result[0][1]} {result[0][2]}", True]}
+        else:
+            return {"login":True, "data":[f"{result[0][1]} {result[0][2]}", False]}
+    else:
+        return {"login":False}
