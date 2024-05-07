@@ -9,10 +9,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/profile/')
-def profile():
-    return render_template('profile.html')
-
 @app.route('/membership/')
 def membership():
     return render_template('membership.html')
@@ -29,13 +25,6 @@ def services():
 def about():
     return render_template('about.html')
 
-@app.route('/login/')
-def login():
-    return render_template('login.html')
-
-@app.route('/create_account/')
-def create_account():
-    return render_template('create_account.html')
 
 
 
@@ -51,7 +40,7 @@ def purchase():
     
 
 # allow user to view events/classes
-@app.route('/event-view/', methods=['POST'])
+@app.route('/classes/event-view/', methods=['POST'])
 def event_view():
     day = request.form.get("day")
     month = request.form.get("month")
@@ -90,7 +79,18 @@ def event_add():
 
 
 # handling user stuff
-# login
+# profile page
+@app.route('/profile/')
+def profile():
+    user = request.cookies.get("user")
+    return siwel.return_profile_html(user)
+
+# login page
+@app.route('/profile/login/')
+def login():
+    return render_template('login.html')
+
+# handle the login form
 @app.route('/login-event/', methods=['POST'])
 def login_event():
     usern = request.form.get("username")
@@ -106,7 +106,12 @@ def login_event():
 
     return redirect("/login/", code=302)
 
-# create account
+# create a user account
+@app.route('/profile/create_account/')
+def create_account():
+    return render_template('create_account.html')
+
+# handle the create account form
 @app.route('/create-user/', methods=['POST'])
 def create_event():
     firstn = request.form.get("firstname")
@@ -114,9 +119,11 @@ def create_event():
     passw = request.form.get("password")
     create = siwel.create_user(firstn, lastn, passw)
 
-    return redirect("/", code=302)
+    res = make_response(redirect("/", code=302))
+    res.set_cookie("user", create)
+    return res
 
-# logout
+# logout and delete cookies
 @app.route('/logout/')
 def logout_event():
     res = make_response(redirect("/", code=302))
@@ -126,18 +133,6 @@ def logout_event():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+# host the website
 if __name__ == "__main__":
     app.run(debug=True)
-
-
