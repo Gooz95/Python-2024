@@ -38,8 +38,19 @@ def create_account():
     return render_template('create_account.html')
 
 
-# lewis added:
-# event view post form
+
+# lewis custom library stuff:
+# purchase a specific membership type
+@app.route('/membership/purchases/')
+def purchase():
+    type = request.args.get("type")
+    if type not in ["standard", "premium", "family"]:
+        return redirect("/membership/", code=302)
+    else:
+        return siwel.return_purchase_html(type)
+    
+
+# allow user to view events/classes
 @app.route('/event-view/', methods=['POST'])
 def event_view():
     day = request.form.get("day")
@@ -47,7 +58,10 @@ def event_view():
     year = request.form.get("year")
     return siwel.return_event_html(day, month, year)
 
-# admin page for adding event
+
+
+# admin stuff
+# add event/class page
 @app.route('/admin/')
 def admin():
     try:
@@ -58,8 +72,8 @@ def admin():
         pass
     return redirect("/", code=302)
 
-# event adder post form
-@app.route('/event-add/', methods=['POST'])
+# add event/class page
+@app.route('/admin/event-add/', methods=['POST'])
 def event_add():
     class_name = request.form.get("class-name")
     day = request.form.get("day")
@@ -74,15 +88,8 @@ def event_add():
     return redirect("/admin/", code=302)
 
 
-@app.route('/membership/purchases/')
-def purchase():
-    type = request.args.get("type")
-    if type not in ["standard", "premium", "family"]:
-        return redirect("/membership/", code=302)
-    else:
-        return siwel.return_purchase_html(type)
 
-
+# handling user stuff
 # login
 @app.route('/login-event/', methods=['POST'])
 def login_event():
@@ -100,7 +107,7 @@ def login_event():
     return redirect("/login/", code=302)
 
 # create account
-@app.route('/create-event/', methods=['POST'])
+@app.route('/create-user/', methods=['POST'])
 def create_event():
     firstn = request.form.get("firstname")
     lastn = request.form.get("lastname")

@@ -5,10 +5,10 @@ def create_connection():
     con = None
     try:
         con = psycopg2.connect(
-            database="rum21133032",
-            user="rum21133032",
-            password="",
-            host="rum21133032.webdev.ucb.ac.uk",
+            database="gym_db",
+            user="postgres",
+            password="lewis",
+            host="localhost",
             port="5432",
         )
         print("Connection to PostgreSQL DB successful")
@@ -25,11 +25,20 @@ else:
     CUR = CONN.cursor()
 
 
+
+# view event html
 def return_event_html(day, month, year):
     # do database query for events with this date
     # if none return "no events"
 
     # create admin page where they can add events for a date
+    date = f"{str(day).zfill(2)}-{month}-{year}"
+    CUR.execute(f"SELECT * FROM events WHERE date = '{date}';")
+    result = CUR.fetchall()
+
+    results = ""
+    for row in result:
+        results += f"<p>{row}</p>"
 
     html = f"""
     <!DOCTYPE html>
@@ -54,7 +63,7 @@ def return_event_html(day, month, year):
             <h2>test</h1>
             <div class="container">
             
-                <p>{str(day).zfill(2)}-{month}-{year}</p>
+                <p>{results}</p>
                 
             </div>
 
@@ -65,6 +74,7 @@ def return_event_html(day, month, year):
     return html
 
 
+# admin event add html
 def return_admin_html():
     month_select = ""
     for count, i in enumerate(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]):
@@ -121,7 +131,7 @@ def return_admin_html():
     """
     return html
 
-
+# purchase a specific membership page
 def return_purchase_html(type):
     values = {
         "standard": {
@@ -174,6 +184,7 @@ def return_purchase_html(type):
     return html
 
 
+
 # log in a user and return their name and if they are admin
 def log_in_user(usern, passw):
     CUR.execute(f"SELECT * FROM users WHERE username = '{usern}' AND password = '{passw}';")
@@ -204,7 +215,6 @@ def create_user(firstn, lastn, passw):
     
     CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{passw}', 'user');")
     return usern2
-
 
 # admin function for adding an event
 def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
