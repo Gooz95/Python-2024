@@ -27,7 +27,6 @@ def about():
 
 
 
-
 # lewis custom library stuff:
 # purchase a specific membership type
 @app.route('/membership/purchases/')
@@ -83,6 +82,7 @@ def event_add():
 @app.route('/profile/')
 def profile():
     user = request.cookies.get("user")
+    print(user)
     return siwel.return_profile_html(user)
 
 # login page
@@ -98,7 +98,7 @@ def login_event():
     login = siwel.log_in_user(usern, passw)
 
     if login["login"]:
-        res = make_response(redirect("/", code=302))
+        res = make_response(redirect("/profile/", code=302))
         if login["data"][1]:
             res.set_cookie("admin", "1")
         res.set_cookie("user", login["data"][0])
@@ -107,9 +107,9 @@ def login_event():
     return redirect("/login/", code=302)
 
 # create a user account
-@app.route('/profile/create_account/')
+@app.route('/profile/create-account/')
 def create_account():
-    return render_template('create_account.html')
+    return render_template('create-account.html')
 
 # handle the create account form
 @app.route('/create-user/', methods=['POST'])
@@ -119,14 +119,14 @@ def create_event():
     passw = request.form.get("password")
     create = siwel.create_user(firstn, lastn, passw)
 
-    res = make_response(redirect("/", code=302))
+    res = make_response(redirect("/profile/", code=302))
     res.set_cookie("user", create)
     return res
 
 # logout and delete cookies
 @app.route('/logout/')
 def logout_event():
-    res = make_response(redirect("/", code=302))
+    res = make_response(redirect("/profile/", code=302))
     res.set_cookie("user", max_age=0)
     res.set_cookie("admin", max_age=0)
     return res

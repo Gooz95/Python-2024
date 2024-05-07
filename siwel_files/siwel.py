@@ -188,10 +188,14 @@ def return_purchase_html(type):
 #
 def return_profile_html(usern):
     if usern != None:
+        CUR.execute(f"SELECT firstname, lastname FROM users WHERE username = '{usern}';")
+        result = CUR.fetchall()
+        print(result)
         content = f"""
                     <div class="container">
                         <h1>Member Profile</h1>
-                        <h2>Welcome, {usern}!</h2>
+                        <h2>Welcome, {result[0][0]} {result[0][1]}!</h2>
+                        <p>Your username is: {usern}</p>
                         <p>Here, you can view and manage your membership information.</p>
                         <h3>Your Classes</h3>
                         <p>Show classes for the user that they are signed up for.</p>
@@ -209,7 +213,7 @@ def return_profile_html(usern):
         content = f"""
                     <div class="container">
                         <a href="/profile/login/">Log in</a>
-                        <a href="/profile/create_account">Create an account</a>
+                        <a href="/profile/create-account">Create an account</a>
                     </div>
                     """
 
