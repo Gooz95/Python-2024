@@ -1,7 +1,7 @@
 import psycopg2
 from psycopg2 import OperationalError
 
-def create_connection():
+def create_connection(): # these parameters need to be changed based on who is testing the website, check db_init.py for known params
     con = None
     try:
         con = psycopg2.connect(
@@ -17,6 +17,7 @@ def create_connection():
     return con
 
 
+# create global connection and cursor variables
 CONN = create_connection()
 if CONN == None:
     print("Connection to PostgreSQL DB unsuccessful")
@@ -86,12 +87,13 @@ def return_admin_html():
     CUR.execute("SELECT id, firstname FROM users WHERE usertype = 'trainer';")
     trainers = CUR.fetchall()
     for i in trainers:
-        trainer_select += f"<option value='{i[0]}'>{i[1]}</option>" # value would be trainer id with id+name as option
+        trainer_select += f"<option value='{i[0]}'>{i[1]}</option>"
 
     html = f"""
     <!DOCTYPE html>
     <html>
         <head>
+            <title>Admin</title>
             <link rel="stylesheet" href='../static/global.css'>
             <link rel="stylesheet" href='../static/classes.css'>
         </head>
@@ -185,7 +187,7 @@ def return_purchase_html(type):
     """
     return html
 
-#
+# show profile/account information based on if they are logged in or not
 def return_profile_html(usern):
     if usern != None:
         CUR.execute(f"SELECT firstname, lastname FROM users WHERE username = '{usern}';")
@@ -208,8 +210,6 @@ def return_profile_html(usern):
                     </div>
                     """
     else:
-        # CUR.execute(f"SELECT * FROM users WHERE username = '{usern}';")
-        # result = CUR.fetchall()
         content = f"""
                     <div class="container">
                         <a href="/profile/login/">Log in</a>
