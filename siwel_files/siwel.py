@@ -199,9 +199,13 @@ def return_profile_html(usern):
                         <p>View and manage your membership plans here.</p>
                         <h3>Billing and Invoice</h3>
                         <p>Access your billing information and view invoices.</p>
+
+                        <a href="/logout/">Log out</a>
                     </div>
                     """
     else:
+        # CUR.execute(f"SELECT * FROM users WHERE username = '{usern}';")
+        # result = CUR.fetchall()
         content = f"""
                     <div class="container">
                         <a href="/profile/login/">Log in</a>
@@ -250,14 +254,14 @@ def return_profile_html(usern):
 
 # log in a user and return their name and if they are admin
 def log_in_user(usern, passw):
-    CUR.execute(f"SELECT * FROM users WHERE username = '{usern}' AND password = '{passw}';")
+    CUR.execute(f"SELECT usertype FROM users WHERE username = '{usern}' AND password = '{passw}';")
     result = CUR.fetchall()
 
     if len(result) == 1:
-        if result[0][5] == "admin":
-            return {"login":True, "data":[f"{result[0][1]} {result[0][2]}", True]}
+        if result[0][0] == "admin":
+            return {"login":True, "data":[usern, True]}
         else:
-            return {"login":True, "data":[f"{result[0][1]} {result[0][2]}", False]}
+            return {"login":True, "data":[usern, False]}
     else:
         return {"login":False}
 

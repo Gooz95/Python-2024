@@ -61,8 +61,8 @@ def admin():
         pass
     return redirect("/", code=302)
 
-# add event/class page
-@app.route('/admin/event-add/', methods=['POST'])
+# handle event add form
+@app.route('/event-add/', methods=['POST'])
 def event_add():
     class_name = request.form.get("class-name")
     day = request.form.get("day")
