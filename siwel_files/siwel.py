@@ -190,9 +190,17 @@ def return_purchase_html(type):
 # show profile/account information based on if they are logged in or not
 def return_profile_html(usern):
     if usern != None:
-        CUR.execute(f"SELECT firstname, lastname FROM users WHERE username = '{usern}';")
+        CUR.execute(f"SELECT firstname, lastname, usertype FROM users WHERE username = '{usern}';")
         result = CUR.fetchall()
-        print(result)
+
+        if_admin = ""
+        if result[0][2] == "admin":
+            if_admin = """
+                    <div class="container">
+                        <a href='/admin/'>Admin</a>
+                    </div>
+                    """
+
         content = f"""
                     <div class="container">
                         <h1>Member Profile</h1>
@@ -208,6 +216,7 @@ def return_profile_html(usern):
 
                         <a href="/logout/">Log out</a>
                     </div>
+                    {if_admin}
                     """
     else:
         content = f"""
@@ -216,8 +225,6 @@ def return_profile_html(usern):
                         <a href="/profile/create-account">Create an account</a>
                     </div>
                     """
-
-
 
     html = f"""
     <!DOCTYPE html>

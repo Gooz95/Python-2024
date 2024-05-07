@@ -82,7 +82,6 @@ def event_add():
 @app.route('/profile/')
 def profile():
     user = request.cookies.get("user")
-    print(user)
     return siwel.return_profile_html(user)
 
 # login page
@@ -104,7 +103,7 @@ def login_event():
         res.set_cookie("user", login["data"][0])
         return res
 
-    return redirect("/login/", code=302)
+    return redirect("/profile/login/", code=302)
 
 # create a user account
 @app.route('/profile/create-account/')
