@@ -13,20 +13,6 @@ body {
     padding: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ===== navbar stuff ===== */
 .navbar {
     background-color: #333;
@@ -95,18 +81,6 @@ body {
 .navbar li a.active {
     background-color: #0056b3; /* Change background color of active link */
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Bottom Navigation bar */
 /* static/styles.css */
