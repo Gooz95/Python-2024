@@ -15,6 +15,10 @@ body {
     border: 1px solid #ffffff; /* Add a border for visual separation */
 }
 
+td {
+    background-color: #fff;
+}
+
 .class-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */

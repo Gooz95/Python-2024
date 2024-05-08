@@ -46,35 +46,42 @@ body {
 /* light mode vs dark mode preferences on text */
 @media (prefers-color-scheme: light) {
     .navbar li a, p, h1, h2, h3 { /* here it could be made to just black text shadow as the text is visible enough already */
-        text-shadow: 1px  1px 0 #fff, 
-                    -1px -1px 0 #fff,  
-                     1px -1px 0 #fff,  
-                    -1px  1px 0 #fff;
-        color: rgb(0, 0, 0);
-    }
-
-    .navbar li a.active {
-        border: 1px solid #ffffff; /* Add a border for visual separation */
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    .navbar li a, p, h1, h2, h3 {
-        text-shadow: 1px  1px 0 #000000, 
-                    -1px -1px 0 #000000,  
-                     1px -1px 0 #000000,  
-                    -1px  1px 0 #000000;
+        text-shadow: 1px  1px 0 rgb(0, 0, 0), 
+                    -1px -1px 0 rgb(0, 0, 0),  
+                     1px -1px 0 rgb(0, 0, 0),  
+                    -1px  1px 0 rgb(0, 0, 0);
         color: rgb(255, 255, 255);
     }
 
     .navbar li a.active {
         border: 1px solid #000000; /* Add a border for visual separation */
     }
+    
+    .navbar li a:hover {
+        border: 1px solid #000000;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .navbar li a, p, h1, h2, h3 {
+        text-shadow: 1px  1px 0 rgb(0, 0, 0), 
+                    -1px -1px 0 rgb(0, 0, 0),  
+                     1px -1px 0 rgb(0, 0, 0),  
+                    -1px  1px 0 rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+    }
+
+    .navbar li a.active {
+        border: 1px solid #000000; /* Add a border for visual separation */
+    }
+
+    .navbar li a:hover {
+        border: 1px solid #000000;
+    }
 }
 
 .navbar li a:hover {
     background-color: #0056b3;
-    border: 1px solid #000000; /* Add a border for visual separation */
     transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 

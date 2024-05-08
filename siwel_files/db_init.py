@@ -26,14 +26,15 @@ def users_table_creation():
             id SERIAL PRIMARY KEY,
             firstname TEXT,
             lastname TEXT,
+            username TEXT,
             password TEXT,
             usertype TEXT
             );"""
     CUR.execute(sql)
 
-    fake_users = [["Lewis","Rumsby","pass123","admin"], ["Axel","Seston","qwerty","user"],["Dawood","Madarshahian","p@ssw0rd","trainer"], ["Luis", "Henrique", "wordpass", "trainer"]]
+    fake_users = [["Lewis","Rumsby","lewisrum","pass123","admin"], ["Axel","Seston","axelses","qwerty","user"],["Dawood","Madarshahian","dawoodmad","p@ssw0rd","trainer"], ["Luis", "Henrique","luishen","wordpass", "trainer"]]
     for i in fake_users:
-        CUR.execute(f"INSERT INTO users (firstname, lastname, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}');")
+        CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
 
 
@@ -45,13 +46,13 @@ def events_table_creation():
             date TEXT,
             starttime TEXT,
             endtime TEXT,
-            trainer TEXT
+            trainer_id INT
             );"""
     CUR.execute(sql)
 
-    fake_events = [["Cardio","03-04-2024","09:30","10:30", "Dawood"], ["Gym","05-04-2024","14:45","16:15", "Luis"], ["Calesthenics","05-04-2024","10:00","12:30", "Dawood"]]
+    fake_events = [["Cardio","03-04-2024","09:30","10:30", 3], ["Gym","05-04-2024","14:45","16:15", 4], ["Calesthenics","05-04-2024","10:00","12:30", 3]]
     for i in fake_events:
-        CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
+        CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer_id) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
 
 

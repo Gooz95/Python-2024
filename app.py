@@ -2,17 +2,12 @@
 
 from flask import Flask, render_template, request, redirect, make_response
 from siwel_files import siwel
-from datetime import date
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-@app.route('/profile/')
-def profile():
-    return render_template('profile.html')
 
 @app.route('/membership/')
 def membership():
@@ -31,16 +26,30 @@ def about():
     return render_template('about.html')
 
 
-# lewis added:
-# event view post form
-@app.route('/event-view/', methods=['POST'])
+
+# lewis custom library stuff:
+# purchase a specific membership type
+@app.route('/membership/purchases/')
+def purchase():
+    type = request.args.get("type")
+    if type not in ["standard", "premium", "family"]:
+        return redirect("/membership/", code=302)
+    else:
+        return siwel.return_purchase_html(type)
+    
+
+# allow user to view events/classes
+@app.route('/classes/event-view/', methods=['POST'])
 def event_view():
     day = request.form.get("day")
     month = request.form.get("month")
     year = request.form.get("year")
     return siwel.return_event_html(day, month, year)
 
-# admin page for adding event
+
+
+# admin stuff
+# add event/class page
 @app.route('/admin/')
 def admin():
     try:
@@ -51,21 +60,10 @@ def admin():
         pass
     return redirect("/", code=302)
 
-@app.route('/set-admin/')
-def set_admin():
-    res = make_response(redirect("/", code=302))
-    res.set_cookie("admin", "1")
-    return res
-
-@app.route('/remove-admin/')
-def remove_admin():
-    res = make_response(redirect("/", code=302))
-    res.set_cookie("admin", "0")
-    return res
-
-# event adder post form
+# handle event add form
 @app.route('/event-add/', methods=['POST'])
 def event_add():
+    class_name = request.form.get("class-name")
     day = request.form.get("day")
     month = request.form.get("month")
     year = request.form.get("year")
@@ -73,18 +71,67 @@ def event_add():
     end_time = request.form.get("end-time")
     trainer = request.form.get("trainers")
 
-    print(day, month, year, start_time, end_time, trainer)
+
+    siwel.db_event_add(class_name, day, month, year, start_time, end_time, trainer)
     return redirect("/admin/", code=302)
 
 
-@app.route('/membership/purchases/')
-def purchase():
-    type = request.args.get("type")
-    if type not in ["standard", "premium", "family"]:
-        return redirect("/membership/", code=302)
-    else:
-        return siwel.return_purchase_html(type)
+
+# handling user stuff
+# profile page
+@app.route('/profile/')
+def profile():
+    user = request.cookies.get("user")
+    return siwel.return_profile_html(user)
+
+# login page
+@app.route('/profile/login/')
+def login():
+    return render_template('login.html')
+
+# handle the login form
+@app.route('/login-event/', methods=['POST'])
+def login_event():
+    usern = request.form.get("username")
+    passw = request.form.get("password")
+    login = siwel.log_in_user(usern, passw)
+
+    if login["login"]:
+        res = make_response(redirect("/profile/", code=302))
+        if login["data"][1]:
+            res.set_cookie("admin", "1")
+        res.set_cookie("user", login["data"][0])
+        return res
+
+    return redirect("/profile/login/", code=302)
+
+# create a user account
+@app.route('/profile/create-account/')
+def create_account():
+    return render_template('create-account.html')
+
+# handle the create account form
+@app.route('/create-user/', methods=['POST'])
+def create_event():
+    firstn = request.form.get("firstname")
+    lastn = request.form.get("lastname")
+    passw = request.form.get("password")
+    create = siwel.create_user(firstn, lastn, passw)
+
+    res = make_response(redirect("/profile/", code=302))
+    res.set_cookie("user", create)
+    return res
+
+# logout and delete cookies
+@app.route('/logout/')
+def logout_event():
+    res = make_response(redirect("/profile/", code=302))
+    res.set_cookie("user", max_age=0)
+    res.set_cookie("admin", max_age=0)
+    return res
 
 
+
+# host the website
 if __name__ == "__main__":
     app.run(debug=True)
