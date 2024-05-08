@@ -1,7 +1,11 @@
 import psycopg2
 from psycopg2 import OperationalError
 
-def create_connection(): # these parameters need to be changed based on who is testing the website, check db_init.py for known params
+# these parameters need to be changed based on who is testing the website, refer to db_init.py for params
+# if testing at University use the VirtualMin database it has postgreSQL db already there
+# if testing at home download pgAdmin from https://www.postgresql.org
+# run db_init.py before trying to run the website as the tables will not exist
+def create_connection():
     con = None
     try:
         con = psycopg2.connect(
@@ -18,6 +22,8 @@ def create_connection(): # these parameters need to be changed based on who is t
 
 
 # create global connection and cursor variables
+# possibly a better way to do this as this runs twice on server startup and the connection and cursor never get closed
+# however as the goal for the project was not about best practices this will do
 CONN = create_connection()
 if CONN == None:
     print("Connection to PostgreSQL DB unsuccessful")
@@ -29,20 +35,21 @@ else:
 
 # view event html
 def return_event_html(day, month, year):
-    date = f"{str(day).zfill(2)}-{month}-{year}"
+    date = f"{str(day).zfill(2)}-{month}-{year}" # reformat the date
     CUR.execute(f"SELECT * FROM events WHERE date = '{date}';")
     result = CUR.fetchall()
 
     results = "<table><tr><th>Class name</th><th>Hours</th></tr>"
-    if len(result) == 0:
+    if len(result) == 0: # if no results then set the output to inform user of this
         results=f"<p>No events</p>"
-    else:
+    else: # if results exist then create a table to display to user
         for row in result:
             results += f"<tr><td>{row[1]}</td><td>{row[3]} -> {row[4]}</td></tr>"
         results+="</table>"
 
             
-
+    # returning html as a string works the same way as 'render_template' does with a html file however
+    # this allows for python variables to be used on the html page using f-strings
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -72,22 +79,21 @@ def return_event_html(day, month, year):
         </body>
     </html>
     """
-
     return html
 
 
 # admin event add html
 def return_admin_html():
-    month_select = ""
+    month_select = "" # select input for months
     for count, i in enumerate(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]):
         month_select += f"<option value='{str(count+1).zfill(2)}'>{i}</option>"
 
     trainer_select = ""
 
-    CUR.execute("SELECT id, firstname FROM users WHERE usertype = 'trainer';")
+    CUR.execute("SELECT id, firstname FROM users WHERE usertype = 'trainer';") # this query is inefficient with a large enough database
     trainers = CUR.fetchall()
     for i in trainers:
-        trainer_select += f"<option value='{i[0]}'>{i[1]}</option>"
+        trainer_select += f"<option value='{i[0]}'>{i[1]}</option>" # select input with all known trainers in
 
     html = f"""
     <!DOCTYPE html>
@@ -136,6 +142,7 @@ def return_admin_html():
 
 # purchase a specific membership page
 def return_purchase_html(type):
+    # dicts with the relevant data associated with plan selected, this is accessed and displayed based off which option user selected
     values = {
         "standard": {
             "name" : "Standard Plan",
@@ -189,18 +196,20 @@ def return_purchase_html(type):
 
 # show profile/account information based on if they are logged in or not
 def return_profile_html(usern):
+    # if user logged in cookie is None then no one is logged in, if not None then it is a username
     if usern != None:
         CUR.execute(f"SELECT firstname, lastname, usertype FROM users WHERE username = '{usern}';")
         result = CUR.fetchall()
 
         if_admin = ""
-        if result[0][2] == "admin":
+        if result[0][2] == "admin": # add button linking to admin page if they are an admin
             if_admin = """
                     <div class="container">
                         <a href='/admin/'>Admin</a>
                     </div>
                     """
 
+        # create the content to display if user was logged in
         content = f"""
                     <div class="container">
                         <h1>Member Profile</h1>
@@ -218,7 +227,8 @@ def return_profile_html(usern):
                     </div>
                     {if_admin}
                     """
-    else:
+        
+    else: # if no one logged in then display option for login/create an account
         content = f"""
                     <div class="container">
                         <a href="/profile/login/">Log in</a>
@@ -226,6 +236,7 @@ def return_profile_html(usern):
                     </div>
                     """
 
+    # pass content into the base layout for page
     html = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -268,42 +279,47 @@ def log_in_user(usern, passw):
     CUR.execute(f"SELECT usertype FROM users WHERE username = '{usern}' AND password = '{passw}';")
     result = CUR.fetchall()
 
-    if len(result) == 1:
-        if result[0][0] == "admin":
-            return {"login":True, "data":[usern, True]}
+    if len(result) == 1: # if there is a result then the user exists
+        if result[0][0] == "admin": # if user is an admin then send back admin=True as well
+            return {"login":True, "data":[usern, True]} # logged in is True as well as username and admin = True
         else:
-            return {"login":True, "data":[usern, False]}
+            return {"login":True, "data":[usern, False]} # logged in is True as well as username and admin = False
     else:
-        return {"login":False}
+        return {"login":False} # logged in is False
 
 # create a user account
 def create_user(firstn, lastn, passw):
-    usern = firstn.lower() + lastn.lower()[:3]
+    usern = firstn.lower() + lastn.lower()[:3] # username is firstname + first 3 letters of last name all in lowercase
+    # despite the index should be out of bounds if the user enters a last name that is less than 3 letters this does not throw an error
 
-
-    for i in range(0, 100):
+    for i in range(0, 100): # this is potentially a bad solution to a user already existing however for the purpose of being a functional website itll do
+        # first assign a temporary variable to the username generated from user firstname and last name
         usern2 = usern
-        CUR.execute(f"SELECT * FROM users WHERE username = '{usern2}';")
+        CUR.execute(f"SELECT * FROM users WHERE username = '{usern2}';") # check if the username exists
         result = CUR.fetchall()
 
-        if len(result) == 0:
+        if len(result) == 0: # if it is unique then break from the loop
             break
         else:
-            usern += str(i)
+            usern += str(i) # however if it is not unique then add i to the end of the username and recheck, i increments with each non unique pass so if there are mutliple 'lewisrum' it will then generate 'lewisrum0', 'lewisrum1', 'lewisrum2', ... etc
+            # with enough generation (100+) this will begin creating duplicate usernames however this can be avoided with an arbitrarily number however the loop will take longer and longer to complete and also still does not fix the problem
+            # alternative solutions can be making the user decide their username for themselves or adding something more complex to the end of the initial username that doesnt scale with the for loop like a randomly generated 4 length string 
     
     CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{passw}', 'user');")
     return usern2
 
 # admin function for adding an event
 def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
-    date = f"{str(day).zfill(2)}-{month}-{year}"
+    date = f"{str(day).zfill(2)}-{month}-{year}" # reformat date
     no_empty_values = True
-    for i in [class_name, start_time, end_time]:
+    for i in [class_name, start_time, end_time]: # quick loop to ensure values are not empty
         if i == "":
             no_empty_values = False
-    if no_empty_values:
+    if no_empty_values: # add the event to the database if the check is passed
         CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');")
         CONN.commit()
     else:
-        print("Values cannot be empty")
+        print("Values cannot be empty") # pointless commiting to console as admin will likely not have access to console
+        # it could be display to admin, however it can be argued that the admin should just be told not to add empty values or it will not add it to the db
+        # printing this or not the event is not added regardless
     
