@@ -68,6 +68,7 @@ settings = [
     ["rum21133032", "rum21133032", "", "rum21133032.webdev.ucb.ac.uk", "5432"], # VirtualMin db on University LAN
     ["gym_db", "postgres", "dawood", "localhost", "5432"], # pgAdmin 4 on Dawood computer
     ["gym_db", "postgres", "lewis", "localhost", "5432"], # docker container on Lewis laptop
+    ["gym_db", "postgres", "axel", "localhost", "5432"], # pgadmin4 on axel's computer
     # add the params you have set for your database here
 ]
 for id, i in enumerate(settings):

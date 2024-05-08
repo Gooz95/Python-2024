@@ -11,7 +11,7 @@ def create_connection():
         con = psycopg2.connect(
             database="gym_db",
             user="postgres",
-            password="lewis",
+            password="axel",
             host="localhost",
             port="5432",
         )
