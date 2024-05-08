@@ -1,5 +1,7 @@
+# this script is only for initializing the database on user computer
 import psycopg2
 from psycopg2 import OperationalError
+# useful website for sql queries in a postgreSQL db:
 # https://www.tutorialspoint.com/postgresql/postgresql_where_clause.htm
 
 # establish connnection with database
@@ -58,11 +60,15 @@ def events_table_creation():
 
 
 # these are various connection settings depending on which db you are trying to connnect to - Lewis
+# set up the postgreSQL database and add your params below then run the script
+# you will also need to change the connection params in siwel.py to yours
 settings = [
+    #[db_name,  username,  password, hostname,   port  ]
     ["gym_db", "postgres", "lewis", "localhost", "5432"], # pgAdmin 4 on Lewis computer
     ["rum21133032", "rum21133032", "", "rum21133032.webdev.ucb.ac.uk", "5432"], # VirtualMin db on University LAN
     ["gym_db", "postgres", "dawood", "localhost", "5432"], # pgAdmin 4 on Dawood computer
-    
+    ["gym_db", "postgres", "lewis", "localhost", "5432"], # docker container on Lewis laptop
+    # add the params you have set for your database here
 ]
 for id, i in enumerate(settings):
     print(f"{id+1}. {i}")
@@ -82,6 +88,7 @@ else:
     users_table_creation()
     events_table_creation()
 
+    # show a test query
     CUR.execute("SELECT firstname FROM users WHERE usertype = 'trainer';")
     result = CUR.fetchall()
     for row in result:
