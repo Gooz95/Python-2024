@@ -11,7 +11,7 @@ def create_connection():
         con = psycopg2.connect(
             database="gym_db",
             user="postgres",
-            password="axel",
+            password="lewis",
             host="localhost",
             port="5432",
         )
@@ -205,7 +205,7 @@ def return_profile_html(usern):
         if result[0][2] == "admin": # add button linking to admin page if they are an admin
             if_admin = """
                     <div class="container">
-                        <a href='/admin/'>Admin</a>
+                        <a class="button" href='/admin/'>Admin</a>
                     </div>
                     """
 
@@ -223,7 +223,7 @@ def return_profile_html(usern):
                         <h3>Billing and Invoice</h3>
                         <p>Access your billing information and view invoices.</p>
 
-                        <a href="/logout/">Log out</a>
+                        <a class="button" href="/logout/">Log out</a>
                     </div>
                     {if_admin}
                     """
@@ -231,8 +231,8 @@ def return_profile_html(usern):
     else: # if no one logged in then display option for login/create an account
         content = f"""
                     <div class="container">
-                        <a href="/profile/login/">Log in</a>
-                        <a href="/profile/create-account">Create an account</a>
+                        <a class="button" href="/profile/login/">Log in</a>
+                        <a class="button" href="/profile/create-account">Create an account</a>
                     </div>
                     """
 
