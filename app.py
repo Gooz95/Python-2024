@@ -27,6 +27,11 @@ def about():
 
 
 
+
+
+
+
+
 # lewis custom library stuff:
 # purchase a specific membership type
 @app.route('/membership/purchases/')
@@ -37,6 +42,8 @@ def purchase():
     else:
         return siwel.return_purchase_html(type)
     
+
+
 
 # allow user to view events/classes
 @app.route('/classes/event-view/', methods=['POST'])

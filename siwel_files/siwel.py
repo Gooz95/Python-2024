@@ -7,7 +7,7 @@ def create_connection(): # these parameters need to be changed based on who is t
         con = psycopg2.connect(
             database="gym_db",
             user="postgres",
-            password="lewis",
+            password="dawood",
             host="localhost",
             port="5432",
         )
@@ -25,8 +25,20 @@ else:
     CONN.autocommit = True
     CUR = CONN.cursor()
 
+# ==========================================================
 
 
+
+
+
+
+
+
+
+
+
+
+# =========================================================
 # view event html
 def return_event_html(day, month, year):
     date = f"{str(day).zfill(2)}-{month}-{year}"
@@ -76,7 +88,7 @@ def return_event_html(day, month, year):
     return html
 
 
-# admin event add html
+# admin event add - html page
 def return_admin_html():
     month_select = ""
     for count, i in enumerate(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]):
@@ -276,10 +288,12 @@ def log_in_user(usern, passw):
     else:
         return {"login":False}
 
+
+
+
 # create a user account
 def create_user(firstn, lastn, passw):
     usern = firstn.lower() + lastn.lower()[:3]
-
 
     for i in range(0, 100):
         usern2 = usern
@@ -293,6 +307,9 @@ def create_user(firstn, lastn, passw):
     
     CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{passw}', 'user');")
     return usern2
+
+
+
 
 # admin function for adding an event
 def db_event_add(class_name, day, month, year, start_time, end_time, trainer):

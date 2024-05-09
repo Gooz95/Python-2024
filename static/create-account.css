@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif; /* Set font family */
+    background-color: #f2f2f2; /* Set background color */
+}
+
+.container {
+    max-width: 400px; /* Set maximum width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding */
+    background-color: #fff; /* Set background color for the container */
+    border-radius: 5px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+h1 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Add space below the heading */
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+    width: 100%; /* Set input width to 100% */
+    padding: 10px; /* Add padding */
+    margin-bottom: 15px; /* Add space between inputs */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add rounded corners */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.login input[type="submit"] {
+    width: 100%; /* Set button width to 100% */
+    padding: 10px; /* Add padding */
+    background-color: #007bff; /* Set background color */
+    color: #fff; /* Set text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Add cursor pointer */
+}
+
+.login input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+}
