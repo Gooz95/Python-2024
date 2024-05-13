@@ -30,8 +30,6 @@ def about():
 
 
 
-
-
 # lewis custom library stuff:
 # purchase a specific membership type
 @app.route('/membership/purchases/')
