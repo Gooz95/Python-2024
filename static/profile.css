@@ -16,8 +16,13 @@ body {
 }
 
 .button {
-    background-color: #ffffff;
-    border-radius: 50%;
+    background-color: #007bff; /* Set button background color */
+    color: #fff; /* Set button text color */
+    border: none; /* Remove button border */
+    margin-top: 30px;
+    padding: 10px 30px; /* Add padding to button */
+    border-radius: 100px; /* Add rounded corners to button */
+    cursor: pointer;
 }
 
 .container h2 {
