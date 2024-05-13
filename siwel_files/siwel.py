@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
+from hashlib import *
 
 # these parameters need to be changed based on who is testing the website, refer to db_init.py for params
 # if testing at University use the VirtualMin database it has postgreSQL db already there
@@ -9,10 +10,10 @@ def create_connection():
     con = None
     try:
         con = psycopg2.connect(
-            database="gym_db",
-            user="postgres",
-            password="dawood",
-            host="localhost",
+            database="rum21133032",
+            user="rum21133032",
+            password="",
+            host="rum21133032.webdev.ucb.ac.uk",
             port="5432",
         )
         print("Connection to PostgreSQL DB successful")
@@ -83,7 +84,7 @@ def return_event_html(day, month, year):
                 </ul>
             </nav>
 
-            <h2>Classes scheduled for {str(day).zfill(2)}-{month}-{year}</h1>
+            <h2>Classes scheduled for {str(day).zfill(2)}-{month}-{year}:</h1>
             <div class="container">
                 {results}
             </div>
@@ -187,7 +188,7 @@ def return_purchase_html(type):
                     <li><a href="/">Home</a></li>
                     <li><a href="/profile">Profile</a></li>
                     <li><a href="/classes">Classes</a></li>
-                    <li><a href="/membership">Membership</a></li>
+                    <li><a href="/membership" class="active">Membership</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/about">About</a></li>
                 </ul>
@@ -243,6 +244,10 @@ def return_profile_html(usern):
     else: # if no one logged in then display option for login/create an account
         content = f"""
                     <div class="container">
+                        <h1>Login Page</h1>
+                    </div>
+                    
+                    <div class="container">
                         <a class="button" href="/profile/login/">Log in</a>
                         <a class="button" href="/profile/create-account">Create an account</a>
                     </div>
@@ -288,7 +293,8 @@ def return_profile_html(usern):
 
 # log in a user and return their name and if they are admin
 def log_in_user(usern, passw):
-    CUR.execute(f"SELECT usertype FROM users WHERE username = '{usern}' AND password = '{passw}';")
+    h_passw = sha256(passw.encode('utf-8')).hexdigest()
+    CUR.execute(f"SELECT usertype FROM users WHERE username = '{usern}' AND password = '{h_passw}';")
     result = CUR.fetchall()
 
     if len(result) == 1: # if there is a result then the user exists
@@ -318,8 +324,9 @@ def create_user(firstn, lastn, passw):
             usern += str(i) # however if it is not unique then add i to the end of the username and recheck, i increments with each non unique pass so if there are mutliple 'lewisrum' it will then generate 'lewisrum0', 'lewisrum1', 'lewisrum2', ... etc
             # with enough generation (100+) this will begin creating duplicate usernames however this can be avoided with an arbitrarily number however the loop will take longer and longer to complete and also still does not fix the problem
             # alternative solutions can be making the user decide their username for themselves or adding something more complex to the end of the initial username that doesnt scale with the for loop like a randomly generated 4 length string 
-    
-    CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{passw}', 'user');")
+
+    h_passw = sha256(passw.encode('utf-8')).hexdigest()
+    CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{h_passw}', 'user');")
     return usern2
 
 

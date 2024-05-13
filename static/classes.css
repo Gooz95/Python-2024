@@ -19,6 +19,19 @@ td {
     background-color: #fff;
 }
 
+/* light mode vs dark mode preferences on text */
+@media (prefers-color-scheme: light) {
+    td {
+        color: #000000;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    td {
+        color: #000000;
+    }
+}
+
 .class-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
