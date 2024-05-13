@@ -244,6 +244,10 @@ def return_profile_html(usern):
     else: # if no one logged in then display option for login/create an account
         content = f"""
                     <div class="container">
+                        <h1>Login Page</h1>
+                    </div>
+                    
+                    <div class="container">
                         <a class="button" href="/profile/login/">Log in</a>
                         <a class="button" href="/profile/create-account">Create an account</a>
                     </div>
