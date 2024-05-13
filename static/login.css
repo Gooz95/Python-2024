@@ -25,6 +25,7 @@ h1 {
     border: 1px solid #ccc; /* Add border */
     border-radius: 5px; /* Add rounded corners */
     box-sizing: border-box; /* Include padding and border in the width */
+    color: #000000;
 }
 
 .login input[type="submit"] {

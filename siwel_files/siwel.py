@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
+from hashlib import *
 
 # these parameters need to be changed based on who is testing the website, refer to db_init.py for params
 # if testing at University use the VirtualMin database it has postgreSQL db already there
@@ -288,7 +289,8 @@ def return_profile_html(usern):
 
 # log in a user and return their name and if they are admin
 def log_in_user(usern, passw):
-    CUR.execute(f"SELECT usertype FROM users WHERE username = '{usern}' AND password = '{passw}';")
+    h_passw = sha256(passw.encode('utf-8')).hexdigest()
+    CUR.execute(f"SELECT usertype FROM users WHERE username = '{usern}' AND password = '{h_passw}';")
     result = CUR.fetchall()
 
     if len(result) == 1: # if there is a result then the user exists
@@ -318,8 +320,9 @@ def create_user(firstn, lastn, passw):
             usern += str(i) # however if it is not unique then add i to the end of the username and recheck, i increments with each non unique pass so if there are mutliple 'lewisrum' it will then generate 'lewisrum0', 'lewisrum1', 'lewisrum2', ... etc
             # with enough generation (100+) this will begin creating duplicate usernames however this can be avoided with an arbitrarily number however the loop will take longer and longer to complete and also still does not fix the problem
             # alternative solutions can be making the user decide their username for themselves or adding something more complex to the end of the initial username that doesnt scale with the for loop like a randomly generated 4 length string 
-    
-    CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{passw}', 'user');")
+
+    h_passw = sha256(passw.encode('utf-8')).hexdigest()
+    CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{h_passw}', 'user');")
     return usern2
 
 

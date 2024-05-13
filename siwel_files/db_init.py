@@ -34,7 +34,8 @@ def users_table_creation():
             );"""
     CUR.execute(sql)
 
-    fake_users = [["Lewis","Rumsby","lewisrum","pass123","admin"], ["Axel","Seston","axelses","qwerty","user"],["Dawood","Madarshahian","dawoodmad","p@ssw0rd","trainer"], ["Luis", "Henrique","luishen","wordpass", "trainer"]]
+    fake_users = [["Lewis","Rumsby","lewisrum","9b8769a4a742959a2d0298c36fb70623f2dfacda8436237df08d8dfd5b37374c","admin"], ["Axel","Seston","axelses","65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5","user"],["Dawood","Madarshahian","dawoodmad","a075d17f3d453073853f813838c15b8023b8c487038436354fe599c3942e1f95","trainer"], ["Luis", "Henrique","luishen","c0e21a8ff85153deac82fe7f09c0da1b3bd90ac0ae204e78d7148753b4363c03", "trainer"]]
+    # pass123, qwerty, p@ssw0rd, wordpass
     for i in fake_users:
         CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
