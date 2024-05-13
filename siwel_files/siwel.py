@@ -9,10 +9,10 @@ def create_connection():
     con = None
     try:
         con = psycopg2.connect(
-            database="gym_db",
-            user="postgres",
-            password="dawood",
-            host="localhost",
+            database="rum21133032",
+            user="rum21133032",
+            password="",
+            host="rum21133032.webdev.ucb.ac.uk",
             port="5432",
         )
         print("Connection to PostgreSQL DB successful")
@@ -83,7 +83,7 @@ def return_event_html(day, month, year):
                 </ul>
             </nav>
 
-            <h2>Classes scheduled for {str(day).zfill(2)}-{month}-{year}</h1>
+            <h2>Classes scheduled for {str(day).zfill(2)}-{month}-{year}:</h1>
             <div class="container">
                 {results}
             </div>
