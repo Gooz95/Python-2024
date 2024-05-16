@@ -79,3 +79,11 @@ td {
     background-color: #0056b3; /* Darker green background on hover */
     transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
+.admin-section {
+    margin: 20px; /* Adjust margin as needed */
+    padding: 20px; /* Adjust padding as needed */
+    border: 1px solid #000000; /* Add a border for visual separation */
+    border-radius: 5px; /* Add rounded corners */
+    background-color: #2a2a2a; /* Add a light background color */
+    color: #000000; /* Change font color to white */
+}

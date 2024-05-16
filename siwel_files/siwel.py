@@ -129,7 +129,15 @@ def return_admin_html():
                 </ul>
             </nav>
 
-            <h2>Add an event</h2>
+            <div class="admin-section">
+                <h1>Admin Guide</h1>
+                <p>Greetings and welcome to the gym class schedule admin guide. We'll go over what you need to know in this guide to efficiently plan, maintain, and let staff and members know when classes are being held at the gym.</p>
+                <p>Establish Class Schedule Structure -</p> 
+                <p>In the table below on the "class name" bar, determine the type of class you are scheduling (for example, Yoga, Boxing and Weight ligting).</p>
+                <p>Decide upon the year month and date of the class and input the information into the table.
+                <p>The duration of the class needs to be arranged, use the dropdown options to choose how long the class will last for on the date you have decided.</p>
+                <p>Finally use the dropdown option to select the name of the gym instructor that will host the class.</p>
+            </div>
 
             <div class="container">
                 <form class="event_add" action="/event-add/" method="post">
