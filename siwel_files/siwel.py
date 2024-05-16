@@ -10,10 +10,10 @@ def create_connection():
     con = None
     try:
         con = psycopg2.connect(
-            database="rum21133032",
-            user="rum21133032",
-            password="",
-            host="rum21133032.webdev.ucb.ac.uk",
+            database="gym_db",
+            user="postgres",
+            password="axel",
+            host="localhost",
             port="5432",
         )
         print("Connection to PostgreSQL DB successful")
