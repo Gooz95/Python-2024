@@ -253,6 +253,9 @@ def return_profile_html(usern):
         content = f"""
                     <div class="container">
                         <h1>Login Page</h1>
+                        <p>If you already have an account, please select the 'Log in' button and fill out the username and password section. </p>
+                        <p>From there you can view all account details including your arranged classes, plans billing and more!</p>
+                        <p>If you would like to create an account, you can do that on this page too! Please select the 'create an account' option below and follow the instructions on the next page.</p>
                     </div>
                     
                     <div class="container">
