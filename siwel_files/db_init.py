@@ -76,6 +76,8 @@ for id, i in enumerate(settings):
     print(f"{id+1}. {i}")
 print(f"{id+2}. Other")
 choice = int(input("Which settings to use?\n> "))-1
+
+# if choice was to use other database params
 if choice == len(settings):
     new = []
     new.append(input("Database name: "))
@@ -85,8 +87,7 @@ if choice == len(settings):
     new.append(input("Database port: "))
     settings.append(new)
 
-for id, i in enumerate(settings):
-    print(f"{id+1}. {i}")
+
 CONN = create_connection(settings[choice])
 if  CONN == None:
     print("Connection to PostgreSQL DB unsuccessful")
