@@ -1,8 +1,9 @@
+# useful website for sql queries in a postgreSQL db:
+# https://www.tutorialspoint.com/postgresql/postgresql_where_clause.htm
+
 # this script is only for initializing the database on user computer
 import psycopg2
 from psycopg2 import OperationalError
-# useful website for sql queries in a postgreSQL db:
-# https://www.tutorialspoint.com/postgresql/postgresql_where_clause.htm
 
 # establish connnection with database
 def create_connection(settings):
@@ -34,8 +35,11 @@ def users_table_creation():
             );"""
     CUR.execute(sql)
 
-    fake_users = [["Lewis","Rumsby","lewisrum","9b8769a4a742959a2d0298c36fb70623f2dfacda8436237df08d8dfd5b37374c","admin"], ["Axel","Seston","axelses","65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5","user"],["Dawood","Madarshahian","dawoodmad","a075d17f3d453073853f813838c15b8023b8c487038436354fe599c3942e1f95","trainer"], ["Luis", "Henrique","luishen","c0e21a8ff85153deac82fe7f09c0da1b3bd90ac0ae204e78d7148753b4363c03", "trainer"]]
-    # pass123, qwerty, p@ssw0rd, wordpass
+    fake_users = [["Lewis","Rumsby","lewisrum","9b8769a4a742959a2d0298c36fb70623f2dfacda8436237df08d8dfd5b37374c","admin"], 
+                  ["Axel","Seston","axelses","65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5","user"],
+                  ["Dawood","Madarshahian","dawoodmad","a075d17f3d453073853f813838c15b8023b8c487038436354fe599c3942e1f95","trainer"], 
+                  ["Luis", "Henrique","luishen","c0e21a8ff85153deac82fe7f09c0da1b3bd90ac0ae204e78d7148753b4363c03", "trainer"]]
+    # passwords: pass123, qwerty, p@ssw0rd, wordpass
     for i in fake_users:
         CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
@@ -53,7 +57,9 @@ def events_table_creation():
             );"""
     CUR.execute(sql)
 
-    fake_events = [["Cardio","03-04-2024","09:30","10:30", 3], ["Gym","05-04-2024","14:45","16:15", 4], ["Calesthenics","05-04-2024","10:00","12:30", 3]]
+    fake_events = [["Cardio","03-04-2024","09:30","10:30", 3], 
+                   ["Gym","05-04-2024","14:45","16:15", 4], 
+                   ["Calesthenics","05-04-2024","10:00","12:30", 3]]
     for i in fake_events:
         CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer_id) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
@@ -61,7 +67,7 @@ def events_table_creation():
 
 
 # these are various connection settings depending on which db you are trying to connnect to - Lewis
-# set up the postgreSQL database and add your params below then run the script
+# set up the postgreSQL database and choose the other option if your params are not in the array below
 # you will also need to change the connection params in siwel.py to yours
 settings = [
     #[db_name,  username,  password, hostname,   port  ]
@@ -86,7 +92,6 @@ if choice == len(settings):
     new.append(input("Database hostname: "))
     new.append(input("Database port: "))
     settings.append(new)
-
 
 CONN = create_connection(settings[choice])
 if  CONN == None:
