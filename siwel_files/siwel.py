@@ -12,7 +12,7 @@ def create_connection():
         con = psycopg2.connect(
             database="gym_db",
             user="postgres",
-            password="axel",
+            password="lewis",
             host="localhost",
             port="5432",
         )
@@ -103,7 +103,7 @@ def return_admin_html():
 
     trainer_select = ""
 
-    CUR.execute("SELECT id, firstname FROM users WHERE usertype = 'trainer';") # this query is inefficient with a large enough database
+    CUR.execute("SELECT id, first_name FROM users WHERE user_type = 'trainer';") # this query is inefficient with a large enough database
     trainers = CUR.fetchall()
     for i in trainers:
         trainer_select += f"<option value='{i[0]}'>{i[1]}</option>" # select input with all known trainers in
@@ -219,7 +219,7 @@ def return_purchase_html(type):
 def return_profile_html(usern):
     # if user logged in cookie is None then no one is logged in, if not None then it is a username
     if usern != None:
-        CUR.execute(f"SELECT firstname, lastname, usertype FROM users WHERE username = '{usern}';")
+        CUR.execute(f"SELECT first_name, last_name, user_type FROM users WHERE username = '{usern}';")
         result = CUR.fetchall()
 
         if_admin = ""
@@ -305,7 +305,7 @@ def return_profile_html(usern):
 # log in a user and return their name and if they are admin
 def log_in_user(usern, passw):
     h_passw = sha256(passw.encode('utf-8')).hexdigest()
-    CUR.execute(f"SELECT usertype FROM users WHERE username = '{usern}' AND password = '{h_passw}';")
+    CUR.execute(f"SELECT user_type FROM users WHERE username = '{usern}' AND password = '{h_passw}';")
     result = CUR.fetchall()
 
     if len(result) == 1: # if there is a result then the user exists
@@ -337,7 +337,7 @@ def create_user(firstn, lastn, passw):
             # alternative solutions can be making the user decide their username for themselves or adding something more complex to the end of the initial username that doesnt scale with the for loop like a randomly generated 4 length string 
 
     h_passw = sha256(passw.encode('utf-8')).hexdigest()
-    CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{firstn}', '{lastn}', '{usern}', '{h_passw}', 'user');")
+    CUR.execute(f"INSERT INTO users (first_name, last_name, username, password, user_type) VALUES ('{firstn}', '{lastn}', '{usern}', '{h_passw}', 'user');")
     return usern2
 
 
@@ -351,7 +351,7 @@ def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
         if i == "":
             no_empty_values = False
     if no_empty_values: # add the event to the database if the check is passed
-        CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');")
+        CUR.execute(f"INSERT INTO events (class_name, date, start_time, end_time, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');")
         CONN.commit()
     else:
         print("Values cannot be empty") # pointless commiting to console as admin will likely not have access to console

@@ -27,11 +27,11 @@ def create_connection(settings):
 def users_table_creation():
     sql = """CREATE TABLE users (
             id SERIAL PRIMARY KEY,
-            firstname TEXT,
-            lastname TEXT,
+            first_name TEXT,
+            last_name TEXT,
             username TEXT,
             password TEXT,
-            usertype TEXT
+            user_type TEXT
             );"""
     CUR.execute(sql)
 
@@ -41,7 +41,7 @@ def users_table_creation():
                   ["Luis", "Henrique","luishen","c0e21a8ff85153deac82fe7f09c0da1b3bd90ac0ae204e78d7148753b4363c03", "trainer"]]
     # passwords: pass123, qwerty, p@ssw0rd, wordpass
     for i in fake_users:
-        CUR.execute(f"INSERT INTO users (firstname, lastname, username, password, usertype) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
+        CUR.execute(f"INSERT INTO users (first_name, last_name, username, password, user_type) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
 
 
@@ -49,10 +49,10 @@ def users_table_creation():
 def events_table_creation():
     sql = """CREATE TABLE events (
             id SERIAL PRIMARY KEY,
-            classname TEXT,
+            class_name TEXT,
             date TEXT,
-            starttime TEXT,
-            endtime TEXT,
+            start_time TEXT,
+            end_time TEXT,
             trainer_id INT
             );"""
     CUR.execute(sql)
@@ -61,7 +61,7 @@ def events_table_creation():
                    ["Gym","05-04-2024","14:45","16:15", 4], 
                    ["Calesthenics","05-04-2024","10:00","12:30", 3]]
     for i in fake_events:
-        CUR.execute(f"INSERT INTO events (classname, date, starttime, endtime, trainer_id) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
+        CUR.execute(f"INSERT INTO events (class_name, date, start_time, end_time, trainer_id) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
 
 
@@ -108,7 +108,7 @@ else:
     events_table_creation()
 
     # show a test query
-    CUR.execute("SELECT firstname FROM users WHERE usertype = 'trainer';")
+    CUR.execute("SELECT first_name FROM users WHERE user_type = 'trainer';")
     result = CUR.fetchall()
     for row in result:
         print(row[0])
