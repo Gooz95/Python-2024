@@ -8,7 +8,8 @@ body {
 
 .container {
     max-width: 1000px;
-    margin: 10px auto;
+    margin: 30px auto;
+    margin-bottom: 50px;
     padding: 20px;
     color: #fff; /* Set text color to white */
     background-color: rgba(0, 0, 0, 0.800);
@@ -18,20 +19,20 @@ body {
 
 @media (prefers-color-scheme: light) {
     h2, p {
-        text-shadow: 1px  1px 0 rgb(0, 0, 0), 
-                    -1px -1px 0 rgb(0, 0, 0),  
-                     1px -1px 0 rgb(0, 0, 0),  
-                    -1px  1px 0 rgb(0, 0, 0);
+        text-shadow: 2px  2px 0 rgb(0, 0, 0), 
+                    -2px -2px 0 rgb(0, 0, 0),  
+                     2px -2px 0 rgb(0, 0, 0),  
+                    -2px  2px 0 rgb(0, 0, 0);
         color: rgb(255, 255, 255);
     }
 }
 
 @media (prefers-color-scheme: dark) {
     h2, p {
-        text-shadow: 1px  1px 0 rgb(0, 0, 0), 
-                    -1px -1px 0 rgb(0, 0, 0),  
-                     1px -1px 0 rgb(0, 0, 0),  
-                    -1px  1px 0 rgb(0, 0, 0);
+        text-shadow: 2px  2px 0 rgb(0, 0, 0), 
+                    -2px -2px 0 rgb(0, 0, 0),  
+                     2px -2px 0 rgb(0, 0, 0),  
+                    -2px  2px 0 rgb(0, 0, 0);
         color: rgb(255, 255, 255);
     }
 }
@@ -40,28 +41,77 @@ body {
 
 
 .grid-container {
-    columns: 2;
     background-color: cadetblue;
-    font-size: 20px;
     text-align: center;
     padding: 20px;
 }
 
-.panel {
-    border: 3px solid #000;
-}
 
 .grid-container p {
     text-align: left;
-    font-size: 10px;
+    font-size: 20px;
     margin: 10px;
+
 }
 
 .grid-container h2 {
-    font-size: 15px;
+    margin: 0;
+    font-size: 9cqmin;
 }
 
+.panel {
+    border: 3px solid #000;
+    height: 250px;
+    
+}
+
+.row {
+    columns: 2;
+    transition: all .5s;
+}
+
+.show {
+    opacity: 1;
+}
+
+.hide {
+    opacity: 0;
+}
+
+.panel div {
+    text-align: center;
+    height: 90px;
+}
 
 .london {
-    background-image: url('images/gym-bg.jpg');
+    background-image: url('images/london.png');
+    background-repeat: no-repeat;
+}
+
+.birmingham {
+    background-image: url('images/london.jpg');
+}
+
+.manchester {
+    background-image: url('images/london.jpg');
+}
+
+.leeds {
+    background-image: url('images/london.jpg');
+}
+
+.scunthorpe {
+    background-image: url('images/london.jpg');
+}
+
+.dubai {
+    background-image: url('images/london.jpg');
+}
+
+.sydney {
+    background-image: url('images/london.jpg');
+}
+
+.italy {
+    background-image: url('images/london.jpg');
 }

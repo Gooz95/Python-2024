@@ -23,8 +23,17 @@
     </nav>
     
     <div class="container">
+        <h1>Our services across all our locations!</h1>
+        <p>a</p>
+        <p>b</p>
+        <p>c</p>
+        <p>d</p>
+        <p>c</p>
+        <p>d</p>
+        <p>c</p>
+        <p>d</p>
         <div class="grid-container">
-            <div>
+            <div class="row" id="1">
                 <div class="panel">
                     <div class="london">
                         <h2>LONDON</h2>
@@ -38,16 +47,29 @@
                     </div>
                     <p>This gym has!</p>
                 </div>
+            </div>
 
+                <br>
+            
+            <div class="row" id="2">
                 <div class="panel">
                     <div class="scunthorpe">
-                        <h2>SCUNTHROPE</h2>
+                        <h2>SCUNTHORPE</h2>
+                    </div>
+                    <p>This gym has!</p>
+                </div>
+                
+                <div class="panel">
+                    <div class="sydney">
+                        <h2>SYDNEY</h2>
                     </div>
                     <p>This gym has!</p>
                 </div>
             </div>
+
+            <br>
                 
-            <div>
+            <div class="row" id="3">
                 <div class="panel">
                     <div class="birmingham">
                         <h2>BIRMINGHAM</h2>
@@ -61,10 +83,21 @@
                     </div>
                     <p>This gym has!</p>
                 </div>
-                
+            </div>
+
+            <br>
+
+            <div class="row" id="4">                
                 <div class="panel">
                     <div class="dubai">
                         <h2>DUBAI</h2>
+                    </div>
+                    <p>This gym has!</p>
+                </div>
+                
+                <div class="panel">
+                    <div class="italy">
+                        <h2>ITALY</h2>
                     </div>
                     <p>This gym has!</p>
                 </div>
@@ -80,6 +113,44 @@
         <p class="copyright">© 2024 Your Company Name. All rights reserved.</p>
     </footer>
 
+
+    <script id="rendered-js">
+        _1 = document.getElementById("1");
+        _2 = document.getElementById("2");
+        _3 = document.getElementById("3");
+        _4 = document.getElementById("4");
+        
+        var myScrollFunc = function () {
+            var y = window.scrollY;
+            console.log(y)
+            if (y >= 30) {
+                _1.className = "row show";
+            } else {
+                _1.className = "row hide";
+            }
+
+            if (y >= 310) {
+                _2.className = "row show";
+            } else {
+                _2.className = "row hide";
+            }
+
+            if (y >= 590) {
+                _3.className = "row show";
+            } else {
+                _3.className = "row hide";
+            }
+
+            if (y >= 870) {
+                _4.className = "row show";
+            } else {
+                _4.className = "row hide";
+            }
+        };
+        
+        window.addEventListener("scroll", myScrollFunc);
+        
+    </script>
 </body>
 </html>
 
