@@ -407,3 +407,5 @@ def db_user_update(usern, usert):
         elif result[0][2] == "trainer":
             CUR.execute(f"DELETE FROM trainers WHERE trainer_fn ='{result[0][0]}';")
         CONN.commit()
+        
+    print("User does not exist")
