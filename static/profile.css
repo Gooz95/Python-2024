@@ -26,6 +26,11 @@ body {
     cursor: pointer;
 }
 
+.back_div {
+    margin: 20px auto;
+    width: 20%;
+}
+
 .container h2 {
     font-size: 24px; /* Increase font size for user's name */
     margin-bottom: 20px; /* Add some spacing below user's name */
@@ -40,4 +45,3 @@ body {
     font-size: 16px; /* Set font size for paragraph text */
     line-height: 1.5; /* Increase line height for better readability */
 }
-

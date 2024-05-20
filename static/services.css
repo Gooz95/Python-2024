@@ -5,3 +5,12 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.container {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    color: #fff; /* Set text color to white */
+    background-color: rgba(0, 0, 0, 0.800);
+    border: 1px solid #ffffff; /* Add a border for visual separation */
+}
