@@ -95,6 +95,7 @@ settings = [
     ["gym_db", "postgres", "lewis", "localhost", "5432"], # docker container on Lewis laptop
     ["gym_db", "postgres", "axel", "localhost", "5432"], # pgadmin4 on axel's computer
     ["tre21143355", "tre21143355", "", "tre21143355.webdev.ucb.ac.uk", "5432"],
+    ["ses21139317", "ses21139317", "", "ses21139317.webdev.ucb.ac.uk", "5432"] #VirtualMin db on University LAN
     # add the params you have set for your database here
 ]
 for id, i in enumerate(settings):
