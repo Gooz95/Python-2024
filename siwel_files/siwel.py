@@ -142,7 +142,8 @@ def return_admin_html():
                 <p>Finally use the dropdown option to select the name of the gym instructor that will host the class.</p>
             </div>
 
-            <div class="container">
+            <div class="admin-section">
+                <h2>Add a class event:</h2>
                 <form class="event_add" action="/event-add/" method="post">
                     <input type="text" placeholder="Class name" name="class-name">
                     <input type="number" min=1 max=31 value=1 name="day">
@@ -159,8 +160,8 @@ def return_admin_html():
                 </form>
             </div>
 
-            <div class="container">
-                <h2>Manage user</h2>
+            <div class="admin-section">
+                <h2>Manage user type:</h2>
                 <form class="event_add" action="/manage-user/" method="post">
                     <input type="text" placeholder="Username" name="usern">
                     <select name="user-type">

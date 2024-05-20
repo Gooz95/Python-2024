@@ -24,6 +24,7 @@ body {
     padding: 10px 30px; /* Add padding to button */
     border-radius: 100px; /* Add rounded corners to button */
     cursor: pointer;
+    text-decoration: none;
 }
 
 .back_div {
