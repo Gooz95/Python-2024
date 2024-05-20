@@ -1,5 +1,3 @@
-# https://code.tutsplus.com/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972t
-
 from flask import Flask, render_template, request, redirect, make_response
 from siwel_files import siwel
 

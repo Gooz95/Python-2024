@@ -1,6 +1,3 @@
-# useful website for sql queries in a postgreSQL db:
-# https://www.tutorialspoint.com/postgresql/postgresql_where_clause.htm
-
 # this script is only for initializing the database on user computer
 from psycopg2 import OperationalError, connect, errors
 
