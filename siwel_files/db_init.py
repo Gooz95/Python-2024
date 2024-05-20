@@ -57,9 +57,9 @@ def events_table_creation():
             );"""
     CUR.execute(sql)
 
-    fake_events = [["Cardio","03-04-2024","09:30","10:30", 3], 
-                   ["Gym","05-04-2024","14:45","16:15", 4], 
-                   ["Calesthenics","05-04-2024","10:00","12:30", 3]]
+    fake_events = [["Cardio","03-04-2024","09:30","10:30", 1], 
+                   ["Gym","05-04-2024","14:45","16:15", 2], 
+                   ["Calesthenics","05-04-2024","10:00","12:30", 1]]
     for i in fake_events:
         CUR.execute(f"INSERT INTO events (class_name, date, start_time, end_time, trainer_id) VALUES ('{i[0]}', '{i[1]}', '{i[2]}', '{i[3]}', '{i[4]}');")
 
