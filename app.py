@@ -75,17 +75,16 @@ def event_add():
     trainer = request.form.get("trainers")
 
 
-    siwel.db_event_add(class_name, day, month, year, start_time, end_time, trainer) # pass to add event api
+    siwel.db_event_add(class_name, day, month, year, start_time, end_time, trainer) # pass to add event route
     return redirect("/admin/", code=302)
 
-
-# add event/class page
+# manage user type
 @app.route('/manage-user/', methods=['POST'])
 def manage_user():
     usern = request.form.get("usern")
     usert = request.form.get("user-type")
 
-    siwel.db_user_update(usern, usert)
+    siwel.db_user_update(usern, usert) # pass to manage user route
     return redirect("/admin/", code=302)
 
 
@@ -111,7 +110,7 @@ def login():
 def login_event():
     usern = request.form.get("username")
     passw = request.form.get("password")
-    login = siwel.log_in_user(usern, passw)
+    login = siwel.log_in_user(usern, passw) # pass to login route
 
     if login["login"]: # if login returned true meaning the details are correct
         res = make_response(redirect("/profile/", code=302))
@@ -133,7 +132,7 @@ def create_event():
     firstn = request.form.get("firstname")
     lastn = request.form.get("lastname")
     passw = request.form.get("password")
-    create = siwel.create_user(firstn, lastn, passw) # pass to create account api
+    create = siwel.create_user(firstn, lastn, passw) # pass to create account route
 
     res = make_response(redirect("/profile/", code=302))
     res.set_cookie("user", create) # set logged in user cookie
