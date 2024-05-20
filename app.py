@@ -83,7 +83,7 @@ def event_add():
 
 # add event/class page
 @app.route('/manage-user/', methods=['POST'])
-def admin():
+def manage_user():
     usern = request.form.get("usern")
     usert = request.form.get("user-type")
 

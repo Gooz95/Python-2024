@@ -11,10 +11,10 @@ def create_connection():
     con = None
     try:
         con = psycopg2.connect(
-            database="ses21139317",
-            user="ses21139317",
-            password="",
-            host="ses21139317.webdev.ucb.ac.uk",
+            database="gym_db",
+            user="postgres",
+            password="lewis",
+            host="localhost",
             port="5432",
         )
         print("Connection to PostgreSQL DB successful")
@@ -319,8 +319,8 @@ def return_profile_html(usern):
 
 # log in a user and return their name and if they are admin
 def log_in_user(usern, passw):
-    h_passw = sha256(passw.encode('utf-8')).hexdigest()
-    CUR.execute(f"SELECT user_type FROM users WHERE username = '{usern}' AND password = '{h_passw}';")
+    h_passw = sha256(passw.encode('utf-8')).hexdigest() # hash password
+    CUR.execute(f"SELECT user_type FROM users WHERE username = '{usern}' AND password = '{h_passw}';") # find if user exists in table
     result = CUR.fetchall()
 
     if len(result) == 1: # if there is a result then the user exists
@@ -351,8 +351,8 @@ def create_user(firstn, lastn, passw):
             # with enough generation (100+) this will begin creating duplicate usernames however this can be avoided with an arbitrarily number however the loop will take longer and longer to complete and also still does not fix the problem
             # alternative solutions can be making the user decide their username for themselves or adding something more complex to the end of the initial username that doesnt scale with the for loop like a randomly generated 4 length string 
 
-    h_passw = sha256(passw.encode('utf-8')).hexdigest()
-    CUR.execute(f"INSERT INTO users (first_name, last_name, username, password, user_type) VALUES ('{firstn}', '{lastn}', '{usern}', '{h_passw}', 'user');")
+    h_passw = sha256(passw.encode('utf-8')).hexdigest() # hash the password
+    CUR.execute(f"INSERT INTO users (first_name, last_name, username, password, user_type) VALUES ('{firstn}', '{lastn}', '{usern}', '{h_passw}', 'user');") # add new user to table
     return usern2
 
 
@@ -361,31 +361,29 @@ def create_user(firstn, lastn, passw):
 # admin function for adding an event
 def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
     def convert(x):
-        X = x.split(":")
-        date = datetime.datetime(2024, 1, 1, int(X[0]), int(X[1]), 0)
-        time = date.timestamp()
-        return time
+        X = x.split(":") # split time in hours and minutes
+        date = datetime.datetime(2024, 1, 1, int(X[0]), int(X[1]), 0) # convert time to a datetime object
+        time = date.timestamp() # get timestamp of the object
+        return time # return the timestamp
 
     date = f"{str(day).zfill(2)}-{month}-{year}" # reformat date
 
     no_empty_values = True
     for i in [class_name, start_time, end_time]: # quick loop to ensure values are not empty
         if i == "":
-            no_empty_values = False
+            no_empty_values = False # no empty value check
 
     if no_empty_values: # add the event to the database if the check is passed
-        hours = (convert(end_time) - convert(start_time)) / 3600
+        hours = (convert(end_time) - convert(start_time)) / 3600 # convert time into timestamps and compare then divide by 3600 to get difference in hours
         if hours <= 0:
-            print("Invalid time")
+            print("Invalid time") # time cannot be negative
         else:
             CUR.execute(f"SELECT hours FROM trainers WHERE id = '{trainer}';") # get hours of trainer from db
             result = CUR.fetchall()
-            hours += result[0][0]
+            hours += result[0][0] # existing hours + new hours
 
-
-
-            CUR.execute(f"UPDATE trainers SET hours = {hours} WHERE id = {trainer};")
-            CUR.execute(f"INSERT INTO events (class_name, date, start_time, end_time, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');")
+            CUR.execute(f"UPDATE trainers SET hours = {hours} WHERE id = '{trainer}';") # updates trainer hours
+            CUR.execute(f"INSERT INTO events (class_name, date, start_time, end_time, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');") # add new event to table
             CONN.commit()
     else:
         print("Values cannot be empty") # pointless commiting to console as admin will likely not have access to console
@@ -394,18 +392,19 @@ def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
 
 
 
+# manage a user's type in the database
 def db_user_update(usern, usert):
-    CUR.execute(f"SELECT first_name, last_name, user_type FROM users WHERE username = '{usern}';")
+    CUR.execute(f"SELECT first_name, last_name, user_type FROM users WHERE username = '{usern}';") # get relevant information on the user
     result = CUR.fetchall()
 
-    if usert == result[0][2]:
+    if usert == result[0][2]: # if changing a trainer to trainer then pass to avoid issues
         print("trainer to trainer")
-    else:
-        CUR.execute(f"UPDATE users SET user_type = {usert} WHERE username = {usern};")
-        if usert == "trainer":
+    else: # other same usertype to usertype cases dont matter
+        CUR.execute(f"UPDATE users SET user_type = '{usert}' WHERE username = '{usern}';") # change the user type
+        if usert == "trainer": # if they are changing to trainer then add a new trainer to the trainer table
             CUR.execute(f"INSERT INTO trainers (trainer_fn, trainer_ln, hours) VALUES ('{result[0][0]}', '{result[0][1]}', '0');")
-        elif result[0][2] == "trainer":
+        elif result[0][2] == "trainer": # if they were a trainer before then delete their trainer row in the trainer table
             CUR.execute(f"DELETE FROM trainers WHERE trainer_fn ='{result[0][0]}';")
-        CONN.commit()
+        CONN.commit() # commit changes
         
     print("User does not exist")
