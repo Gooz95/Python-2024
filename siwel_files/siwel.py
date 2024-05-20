@@ -1,7 +1,8 @@
-import psycopg2
-from psycopg2 import OperationalError
-from hashlib import *
-import datetime
+from psycopg2 import OperationalError, connect
+from hashlib import sha256
+from datetime import datetime
+
+
 
 # these parameters need to be changed based on who is testing the website, refer to db_init.py for params
 # if testing at University use the VirtualMin database it has postgreSQL db already there
@@ -10,7 +11,7 @@ import datetime
 def create_connection():
     con = None
     try:
-        con = psycopg2.connect(
+        con = connect(
             database="gym_db",
             user="postgres",
             password="lewis",
@@ -362,7 +363,7 @@ def create_user(firstn, lastn, passw):
 def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
     def convert(x):
         X = x.split(":") # split time in hours and minutes
-        date = datetime.datetime(2024, 1, 1, int(X[0]), int(X[1]), 0) # convert time to a datetime object
+        date = datetime(2024, 1, 1, int(X[0]), int(X[1]), 0) # convert time to a datetime object
         time = date.timestamp() # get timestamp of the object
         return time # return the timestamp
 

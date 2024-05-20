@@ -2,14 +2,13 @@
 # https://www.tutorialspoint.com/postgresql/postgresql_where_clause.htm
 
 # this script is only for initializing the database on user computer
-import psycopg2
-from psycopg2 import OperationalError
+from psycopg2 import OperationalError, connect, errors
 
 # establish connnection with database
 def create_connection(settings):
     connection = None
     try:
-        connection = psycopg2.connect(
+        connection = connect(
             database=settings[0],
             user=settings[1],
             password=settings[2],
@@ -122,7 +121,7 @@ else:
     for i in ["users", "events", "trainers"]:
         try:
             CUR.execute(f"DROP TABLE {i};")
-        except psycopg2.errors.UndefinedTable:
+        except errors.UndefinedTable:
             pass
     users_table_creation()
     events_table_creation()
