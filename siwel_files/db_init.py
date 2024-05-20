@@ -65,6 +65,24 @@ def events_table_creation():
 
 
 
+# trainers table
+# create trainers table
+def trainers_table_creation():
+    sql = """CREATE TABLE trainers (
+            id SERIAL PRIMARY KEY,
+            trainer_fn TEXT,
+            trainer_ln TEXT,
+            hours INT
+            );"""
+    CUR.execute(sql)
+
+    fake_trainers = [["Dawood","Madarshahian","0"], 
+                     ["Luis", "Henrique","0"]]
+    for i in fake_trainers:
+        CUR.execute(f"INSERT INTO trainers (trainer_fn, trainer_ln, hours) VALUES ('{i[0]}', '{i[1]}', '{i[2]}');")
+
+
+
 
 # these are various connection settings depending on which db you are trying to connnect to - Lewis
 # set up the postgreSQL database and choose the other option if your params are not in the array below
@@ -99,13 +117,14 @@ if  CONN == None:
 else:
     CONN.autocommit = True
     CUR = CONN.cursor()
-    for i in ["users", "events"]:
+    for i in ["users", "events", "trainers"]:
         try:
             CUR.execute(f"DROP TABLE {i};")
         except psycopg2.errors.UndefinedTable:
             pass
     users_table_creation()
     events_table_creation()
+    trainers_table_creation()
 
     # show a test query
     CUR.execute("SELECT first_name FROM users WHERE user_type = 'trainer';")

@@ -10,10 +10,10 @@ def create_connection():
     con = None
     try:
         con = psycopg2.connect(
-            database="gym_db",
-            user="postgres",
-            password="lewis",
-            host="localhost",
+            database="rum21133032",
+            user="rum21133032",
+            password="",
+            host="rum21133032.webdev.ucb.ac.uk",
             port="5432",
         )
         print("Connection to PostgreSQL DB successful")
@@ -103,10 +103,10 @@ def return_admin_html():
 
     trainer_select = ""
 
-    CUR.execute("SELECT id, first_name FROM users WHERE user_type = 'trainer';") # this query is inefficient with a large enough database
+    CUR.execute("SELECT id, trainer_fn, trainer_ln FROM trainers;") # query for trainers
     trainers = CUR.fetchall()
     for i in trainers:
-        trainer_select += f"<option value='{i[0]}'>{i[1]}</option>" # select input with all known trainers in
+        trainer_select += f"<option value='{i[0]}'>{i[1]} {i[2]}</option>" # select input with all known trainers in
 
     html = f"""
     <!DOCTYPE html>
