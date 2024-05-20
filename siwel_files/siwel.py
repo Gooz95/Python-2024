@@ -395,6 +395,13 @@ def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
 
 
 def db_user_update(usern, usert):
+    CUR.execute(f"SELECT first_name, last_name, user_type FROM users WHERE username = '{usern}';")
+    result = CUR.fetchall()
 
-    users
-    user_type
+    if usert == result[0][2]:
+        print("trainer to trainer")
+    else:
+        CUR.execute(f"UPDATE users SET user_type = {usert} WHERE username = {usern};")
+        if usert == "trainer":
+            CUR.execute(f"INSERT INTO trainers (trainer_fn, trainer_ln, hours) VALUES ('{result[0][0]}', '{result[0][1]}', '0');")
+        CONN.commit()
