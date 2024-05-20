@@ -89,29 +89,36 @@ body {
 }
 
 .birmingham {
-    background-image: url('images/london.jpg');
+    background-image: url('images/birmingham.png');
+    background-repeat: no-repeat;
 }
 
 .manchester {
-    background-image: url('images/london.jpg');
+    background-image: url('images/manchester.png');
+    background-repeat: no-repeat;
 }
 
 .leeds {
-    background-image: url('images/london.jpg');
+    background-image: url('images/leeds.png');
+    background-repeat: no-repeat;
 }
 
 .scunthorpe {
-    background-image: url('images/london.jpg');
+    background-image: url('images/scunthorpe.png');
+    background-repeat: no-repeat;
 }
 
 .dubai {
-    background-image: url('images/london.jpg');
+    background-image: url('images/dubai.png');
+    background-repeat: no-repeat;
 }
 
 .sydney {
-    background-image: url('images/london.jpg');
+    background-image: url('images/sydney.png');
+    background-repeat: no-repeat;
 }
 
-.italy {
-    background-image: url('images/london.jpg');
+.milan {
+    background-image: url('images/milan.png');
+    background-repeat: no-repeat;
 }
