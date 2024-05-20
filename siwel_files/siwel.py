@@ -348,9 +348,10 @@ def create_user(firstn, lastn, passw):
         if len(result) == 0: # if it is unique then break from the loop
             break
         else:
-            usern += str(i) # however if it is not unique then add i to the end of the username and recheck, i increments with each non unique pass so if there are mutliple 'lewisrum' it will then generate 'lewisrum0', 'lewisrum1', 'lewisrum2', ... etc
-            # with enough generation (100+) this will begin creating duplicate usernames however this can be avoided with an arbitrarily number however the loop will take longer and longer to complete and also still does not fix the problem
-            # alternative solutions can be making the user decide their username for themselves or adding something more complex to the end of the initial username that doesnt scale with the for loop like a randomly generated 4 length string 
+            usern += str(i) # however if it is not unique then add i to the end of the username and recheck, i increments with each non unique pass so if there are mutliple 'lewisrum' it will
+            # then generate 'lewisrum0', 'lewisrum1', 'lewisrum2', ... etc. with enough generation (100+) this will begin creating duplicate usernames however this can be avoided with an arbitrarily 
+            # high number however the loop will take longer and longer to complete and also still does not fix the problem however, alternative solutions can be making the user decide their username 
+            # for themselves or adding something more complex to the end of the initial username that doesnt scale with the for loop like a randomly generated 4 length string 
 
     h_passw = sha256(passw.encode('utf-8')).hexdigest() # hash the password
     CUR.execute(f"INSERT INTO users (first_name, last_name, username, password, user_type) VALUES ('{firstn}', '{lastn}', '{usern}', '{h_passw}', 'user');") # add new user to table
