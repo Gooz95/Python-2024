@@ -14,7 +14,7 @@ def create_connection():
         con = connect(
             database="gym_db",
             user="postgres",
-            password="lewis",
+            password="144012",
             host="localhost",
             port="5432",
         )
