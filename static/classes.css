@@ -87,3 +87,6 @@ td {
     background-color: #2a2a2a; /* Add a light background color */
     color: #000000; /* Change font color to white */
 }
+.admin-section ul {
+    color: #fff;
+}

@@ -14,7 +14,7 @@ def create_connection():
         con = connect(
             database="gym_db",
             user="postgres",
-            password="lewis",
+            password="axel",
             host="localhost",
             port="5432",
         )
@@ -134,12 +134,15 @@ def return_admin_html():
 
             <div class="admin-section">
                 <h1>Admin Guide</h1>
-                <p>Greetings and welcome to the gym class schedule admin guide. We'll go over what you need to know in this guide to efficiently plan, maintain, and let staff and members know when classes are being held at the gym.</p>
-                <p>Establish Class Schedule Structure -</p> 
-                <p>In the table below on the "class name" bar, determine the type of class you are scheduling (for example, Yoga, Boxing and Weight ligting).</p>
-                <p>Decide upon the year month and date of the class and input the information into the table.
-                <p>The duration of the class needs to be arranged, use the dropdown options to choose how long the class will last for on the date you have decided.</p>
-                <p>Finally use the dropdown option to select the name of the gym instructor that will host the class.</p>
+                <p>Welcome to the gym class schedule admin guide. We'll go over what you need to know in this guide to efficiently plan, maintain, and let staff and members know when classes are being held at the gym. In the table below on the "class name" bar, determine the type of class you are scheduling (for example, Yoga, Boxing and Weight lifting). Decide upon the year month and date of the class and input the information into the table. The duration of the class needs to be arranged, use the dropdown options to choose how long the class will last for on the date you have decided. Finally use the dropdown option to select the name of the gym instructor that will host the class.</p>
+                <h2>Rules of using Admin Page</h2>
+                <ul>
+                    <li>Make sure to use correct grammer when scheduling a class as this is on display to the public</li>
+                    <li>Make sure to use the correct times when scheduling a class</li>
+                    <li>Make sure to use the correct data when scheduling a class</li>
+                    <li>Ensure the correct trainer is selected and make sure to inform them of their class</li>
+                    <li>Make sure the class times have selected numbers</li>
+                </ul>
             </div>
 
             <div class="admin-section">
@@ -269,7 +272,7 @@ def return_profile_html(usern):
     else: # if no one logged in then display option for login/create an account
         content = f"""
                     <div class="container">
-                        <h1>Login Page</h1>
+                        <h1>Profile Page</h1>
                         <p>If you already have an account, please select the 'Log in' button and fill out the username and password section. </p>
                         <p>From there you can view all account details including your arranged classes, plans billing and more!</p>
                         <p>If you would like to create an account, you can do that on this page too! Please select the 'create an account' option below and follow the instructions on the next page.</p>
