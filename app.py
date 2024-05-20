@@ -81,6 +81,20 @@ def event_add():
     return redirect("/admin/", code=302)
 
 
+# add event/class page
+@app.route('/manage-user/', methods=['POST'])
+def admin():
+    usern = request.form.get("usern")
+    usert = request.form.get("user-type")
+
+    siwel.db_user_update(usern, usert)
+    return redirect("/admin/", code=302)
+
+
+
+
+
+
 
 # handling user stuff
 # profile page

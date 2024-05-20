@@ -96,6 +96,7 @@ def return_event_html(day, month, year):
     return html
 
 
+
 # admin event add - html page
 def return_admin_html():
     month_select = "" # select input for months
@@ -152,6 +153,19 @@ def return_admin_html():
                     <input type="time" name="end-time">
                     <select name="trainers">
                         {trainer_select}
+                    </select>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+
+            <div class="container">
+                <h2>Manage user</h2>
+                <form class="event_add" action="/manage-user/" method="post">
+                    <input type="text" placeholder="Username" name="usern">
+                    <select name="user-type">
+                        <option value='user'>User</option>
+                        <option value='trainer'>Trainer</option>
+                        <option value='admin'>Admin</option>
                     </select>
                     <input type="submit" value="Submit">
                 </form>
@@ -377,4 +391,10 @@ def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
         print("Values cannot be empty") # pointless commiting to console as admin will likely not have access to console
         # it could be display to admin, however it can be argued that the admin should just be told not to add empty values or it will not add it to the db
         # printing this or not the event is not added regardless
-    
+
+
+
+def db_user_update(usern, usert):
+
+    users
+    user_type
