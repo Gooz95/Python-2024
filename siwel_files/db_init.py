@@ -72,12 +72,12 @@ def trainers_table_creation():
             id SERIAL PRIMARY KEY,
             trainer_fn TEXT,
             trainer_ln TEXT,
-            hours INT
+            hours REAL
             );"""
     CUR.execute(sql)
 
-    fake_trainers = [["Dawood","Madarshahian","0"], 
-                     ["Luis", "Henrique","0"]]
+    fake_trainers = [["Dawood","Madarshahian",0.0], 
+                     ["Luis", "Henrique",0.0]]
     for i in fake_trainers:
         CUR.execute(f"INSERT INTO trainers (trainer_fn, trainer_ln, hours) VALUES ('{i[0]}', '{i[1]}', '{i[2]}');")
 

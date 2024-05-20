@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2 import OperationalError
 from hashlib import *
+import datetime
 
 # these parameters need to be changed based on who is testing the website, refer to db_init.py for params
 # if testing at University use the VirtualMin database it has postgreSQL db already there
@@ -345,14 +346,33 @@ def create_user(firstn, lastn, passw):
 
 # admin function for adding an event
 def db_event_add(class_name, day, month, year, start_time, end_time, trainer):
+    def convert(x):
+        X = x.split(":")
+        date = datetime.datetime(2024, 1, 1, int(X[0]), int(X[1]), 0)
+        time = date.timestamp()
+        return time
+
     date = f"{str(day).zfill(2)}-{month}-{year}" # reformat date
+
     no_empty_values = True
     for i in [class_name, start_time, end_time]: # quick loop to ensure values are not empty
         if i == "":
             no_empty_values = False
+
     if no_empty_values: # add the event to the database if the check is passed
-        CUR.execute(f"INSERT INTO events (class_name, date, start_time, end_time, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');")
-        CONN.commit()
+        hours = (convert(end_time) - convert(start_time)) / 3600
+        if hours <= 0:
+            print("Invalid time")
+        else:
+            CUR.execute(f"SELECT hours FROM trainers WHERE id = '{trainer}';") # get hours of trainer from db
+            result = CUR.fetchall()
+            hours += result[0][0]
+
+
+
+            CUR.execute(f"UPDATE trainers SET hours = {hours} WHERE id = {trainer};")
+            CUR.execute(f"INSERT INTO events (class_name, date, start_time, end_time, trainer_id) VALUES ('{class_name}', '{date}', '{start_time}', '{end_time}', '{int(trainer)}');")
+            CONN.commit()
     else:
         print("Values cannot be empty") # pointless commiting to console as admin will likely not have access to console
         # it could be display to admin, however it can be argued that the admin should just be told not to add empty values or it will not add it to the db
