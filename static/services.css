@@ -16,6 +16,14 @@ body {
     border: 1px solid #ffffff; /* Add a border for visual separation */
 }
 
+h1 {
+    font-size: 50px;
+}
+
+p {
+    font-size: 25px;
+}
+
 
 @media (prefers-color-scheme: light) {
     h2, p {
@@ -51,12 +59,11 @@ body {
     text-align: left;
     font-size: 20px;
     margin: 10px;
-
 }
 
 .grid-container h2 {
     margin: 0;
-    font-size: 9cqmin;
+    font-size: 7cqmin;
 }
 
 .panel {
