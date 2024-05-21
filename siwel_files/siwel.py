@@ -86,7 +86,7 @@ def return_event_html(day, month, year):
                 </ul>
             </nav>
 
-            <h2>Classes scheduled for {str(day).zfill(2)}-{month}-{year}:</h1>
+            <h2>Classes scheduled for {date}:</h1>
             <div class="container">
                 {results}
             </div>
