@@ -86,8 +86,8 @@ def return_event_html(day, month, year):
                 </ul>
             </nav>
 
-            <h2>Classes scheduled for {date}:</h1>
             <div class="container">
+                <h2>Classes scheduled for {date}:</h1>
                 {results}
             </div>
 
